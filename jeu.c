@@ -12,12 +12,20 @@ Elle commence une partie du jeu. Le premier joueur place une carte citoyen au pr
     aff_plateau(plateau);
     printf("Le joueur 1 commence à jouer.\n");
     restant(j_1);
-    int a = emplacement(plateau);
+    int a = choix_emplacement(plateau);
     place_carte(plateau, &j_1, a, 1);
     aff_plateau(plateau);
-    restant(j_1);
-    printf("Merci ensuite de choisir un personnage");
     int z = choix_personnage(j_1);
+    printf("Vous avez choisi le personnage %d \n", z);
+    int c = choix_emplacement(plateau);
+    place_carte(plateau, &j_2, c, z);
+    applique_pouvoir(plateau, j_2, z);
+    aff_plateau(plateau);
+    /*
+    for (int i = 1; i< 10; i++){
+        printf("\033[%dmJoueur %d\033[0m\n", 40+ i%2+1, i%2+1);
+    }
+    */
 }
 
 void place_carte(struct s_partisan *plateau, struct s_joueur *joueur, int emplacement, int carte)
@@ -37,7 +45,7 @@ Et fait les actions suivantes :
     joueur->cartes[carte - 1] = 0;
 }
 
-int emplacement(struct s_partisan *plateau)
+int choix_emplacement(struct s_partisan *plateau)
 /*
 Cette fonction prends en paramètre le tableau du plateau, et :
 - Demande au joueur la case qu'il souhaite utiliser
@@ -112,30 +120,71 @@ programme renvoie la valeur 9.
 
 int choix_personnage(struct s_joueur j)
 /*
-Cette fonction permet de choisir le personnage à jouer
+Cette fonction permet de choisir le personnage à jouer. Elle prends en paramètre la structure d'un joueur, et renvoie
+le numéro de la carte choisir (entre 1 et 7). La fonction remdemande un nombre si la carte n'est plus disponible ou si la
+valeur rentrée est incorecte.
 */
 {
-    int p;
+    int p, v;
     restant_demande(j);
     do
     {
         printf("Numéro de la carte : ");
-        scanf("%d", &p);
-        if (p > 7)
+        v = scanf("%d", &p);
+        if (v != 1 || p < 1 || p > 7)
+        {
             printf("\033[1;31mLa valeur entrée est incorecte, veuillez réessayer.\033[0m\n");
-        else if (j.cartes[p-1] != 1)
+            scanf("%*[^\n]"); // Pour initialiser la zone de saisie
+        }
+        else if (j.cartes[p - 1] != 1)
+        {
             printf("\033[1;31mLe personnage n'est plus disponible, veuillez choisir un autre personnage.\033[0m\n");
-    } while (p > 7 || j.cartes[p-1] != 1);
-    printf("\nVous avez choisi la carte %d\n", p);
+            scanf("%*[^\n]"); // Pour initialiser la zone de saisie
+        }
+    } while (v != 1 || p < 1 || p > 7 || j.cartes[p - 1] != 1);
     return p;
-    
-
 }
 
-void action_roi(struct s_partisan *plateau, int joueur)
+void applique_pouvoir(struct s_partisan *plateau, struct s_joueur j, int p)
 /*
-Cette fonction fait ...
+Cette fonction applique le pouvoir du personnage que le joueur vient de poser.
+Elle prends en paramètre :
+- Le plateau de jeu
+- Le joueur qui a posé la carte
+- La carte posée
 */
 {
-    printf("\n\nTest réussi\n\n");
+    if (p > 1 && p < 8)
+    {
+        switch (p-1)
+        {
+        case 1:
+            action_roi();
+            break;
+
+        case 2:
+            printf("Action reine ");
+            break;
+
+        case 3:
+            printf("Action princesse ");
+            break;
+
+        case 4:
+            printf("Action ministre ");
+            break;
+
+        case 5:
+            printf("Action général ");
+            break;
+        }
+    }
+}
+
+void action_roi(void)
+/*
+Affiche les cases possibles pour l'action du roi
+*/
+{
+    printf("Je vais afficher plein de cases.\n");
 }
