@@ -1,0 +1,1 @@
+gcc -c ../affichage.c ; gcc -c ../jeu.c ; gcc -c ../main.c ; gcc main.o affichage.o jeu.o -Wall -Wextra -Werror -o ../jeu.exe ; ../jeu.exe
