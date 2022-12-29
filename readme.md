@@ -35,3 +35,7 @@ chmod +x script.sh
 | 5 | Ministre |
 | 6 | Général |
 | 7 | Château |
+
+
+## Choses à faire
++ Ajouter des `if` autour des `scanf` et vérifier qu'ils ne fonctionnent qu'avec la bonne valeur rentrée

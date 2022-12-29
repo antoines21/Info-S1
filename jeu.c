@@ -11,14 +11,13 @@ Elle commence une partie du jeu. Le premier joueur place une carte citoyen au pr
     printf("Plateau initial :\n");
     aff_plateau(plateau);
     printf("Le joueur 1 commence à jouer.\n");
-    printf("Voici les cartes disponibles du joueur 1 : ");
-    restant(j_1.cartes);
+    restant(j_1);
     int a = emplacement(plateau);
     place_carte(plateau, &j_1, a, 1);
     aff_plateau(plateau);
-    printf("Voici les cartes disponibles du joueur 1 : ");
-    restant(j_1.cartes);
-    //int z = choix_personnage(joueur1);
+    restant(j_1);
+    printf("Merci ensuite de choisir un personnage");
+    int z = choix_personnage(j_1);
 }
 
 void place_carte(struct s_partisan *plateau, struct s_joueur *joueur, int emplacement, int carte)
@@ -111,12 +110,26 @@ programme renvoie la valeur 9.
     return index_num;
 }
 
-int choix_personnage(int *cartes_joueurs)
+int choix_personnage(struct s_joueur j)
 /*
 Cette fonction permet de choisir le personnage à jouer
 */
 {
-    printf("Merci de choisir un personnage\n");
+    int p;
+    restant_demande(j);
+    do
+    {
+        printf("Numéro de la carte : ");
+        scanf("%d", &p);
+        if (p > 7)
+            printf("\033[1;31mLa valeur entrée est incorecte, veuillez réessayer.\033[0m\n");
+        else if (j.cartes[p-1] != 1)
+            printf("\033[1;31mLe personnage n'est plus disponible, veuillez choisir un autre personnage.\033[0m\n");
+    } while (p > 7 || j.cartes[p-1] != 1);
+    printf("\nVous avez choisi la carte %d\n", p);
+    return p;
+    
+
 }
 
 void action_roi(struct s_partisan *plateau, int joueur)
