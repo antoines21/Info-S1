@@ -40,6 +40,7 @@ void place_carte(struct s_partisan *, struct s_joueur *, int, int); // Fonction 
 int convertir(char *);                                       // Convertir des coordonnées passées en paramètre en un index pour le tableau du plateau
 int choix_emplacement(struct s_partisan *);                        // Cette fonction demande l'index et le renvoie
 int choix_personnage(struct s_joueur);                                 // Choix du personnage
+int est_plein(struct s_partisan *);
 
 // Fichier jeu - 2 Pouvoir des cartes
 int demande_roi_ministre(int);

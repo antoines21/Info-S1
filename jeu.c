@@ -8,23 +8,46 @@ Cette fonction prends en paramètre le plateau de jeu, et les deux listes corres
 Elle commence une partie du jeu. Le premier joueur place une carte citoyen au premier tour.
 */
 {
-    printf("Plateau initial :\n");
-    aff_plateau(plateau);
-    printf("Le joueur 1 commence à jouer.\n");
-    restant(j_1);
-    int a = choix_emplacement(plateau);
-    place_carte(plateau, &j_1, a, 1);
-    aff_plateau(plateau);
-    int z = choix_personnage(j_1);
-    printf("Vous avez choisi le personnage %d \n", z);
-    int c = choix_emplacement(plateau);
-    place_carte(plateau, &j_2, c, z);
-    aff_plateau(plateau);
-    /*
-    for (int i = 1; i< 10; i++){
-        printf("\033[%dmJoueur %d\033[0m\n", 40+ i%2+1, i%2+1);
+    int i = 0;
+    do{
+        printf("\033[44mTour %d\033[0m", i + 1);
+        printf(" ");
+        printf("\033[%dmJoueur %d\033[0m\n", 40 + i % 2 + 1, i % 2 + 1);
+        aff_plateau(plateau);
+        if (i != 0)
+        {
+            if (i % 2 + 1 == 1)
+            {
+
+                place_carte(plateau, &j_1, choix_emplacement(plateau), choix_personnage(j_1));
+            }
+            else
+            {
+                place_carte(plateau, &j_2, choix_emplacement(plateau), choix_personnage(j_2));
+            }
+        }
+        else
+        {
+            printf("Le joueur 1 pose la carte citoyen.\n");
+            place_carte(plateau, &j_1, choix_emplacement(plateau), 1);
+        }
+        i += 1;
+    } while(est_plein(plateau) != 1);
+}
+
+int est_plein(struct s_partisan *plateau)
+/*
+Cette fonction prends en paramètre le plateau de jeu, et renvoie 1 si le plateau est plein, 0 sinon.
+*/
+{
+    int c = 0;
+    for (int i = 0; i < 9; i++)
+    {
+        if (plateau[i].tuile == 0)
+            c += 1;
     }
-    */
+    if (c == 0) return 1;
+    else return 0;
 }
 
 void place_carte(struct s_partisan *plateau, struct s_joueur *joueur, int emplacement, int carte)
@@ -47,20 +70,20 @@ Et fait les actions suivantes :
     switch (carte)
     {
     case 2:
-        // actions_possibles(emplacement, carte);
-        action_roi(plateau, *joueur, emplacement);
+        // action_roi(plateau, *joueur, emplacement);
+        printf("Action du roi\n");
         break;
     case 3:
-        printf("\n\nAction de la reine\n");
+        printf("Action de la reine\n");
         break;
     case 4:
-        printf("\n\nAction de la princesse\n");
+        printf("Action de la princesse\n");
         break;
     case 5:
-        printf("\n\nAction du ministre\n");
+        printf("Action du ministre\n");
         break;
     case 6:
-        printf("\n\nAction du général\n");
+        printf("Action du général\n");
         break;
     default:
         break;
@@ -209,6 +232,22 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
     int tab[17], i;
     for (i = 0; i < 17; tab[i++] = 0)
         ;
+    if (carte == 4)
+    {
+        int v, choix;
+        do
+        {
+            printf("Orthogonale tapez 1, diagonale tapez 2 : ");
+            v = scanf("%d", &choix);
+            if (v != 1 || choix < 1 || choix > 2)
+            {
+                printf("\033[1;31mLa valeur entrée est incorecte, veuillez réessayer.\033[0m\n");
+                scanf("%*[^\n]"); // Pour initialiser la zone de saisie
+            }
+        } while (v != 1 || choix < 1 || choix > 2);
+        if (choix == 2)
+            carte = 7;
+    }
     switch (emplacement)
     {
     case 0:
@@ -240,6 +279,281 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
         }
         break;
 
+    case 1:
+        if (carte == 2 || carte == 5)
+        {
+            tab[0] = 1;
+            tab[2] = 1;
+            tab[3] = 1;
+            tab[4] = 1;
+            tab[5] = 1;
+        }
+        if (carte == 3)
+        {
+            tab[11] = 1;
+            tab[12] = 1;
+            tab[13] = 1;
+            tab[14] = 1;
+            tab[15] = 1;
+        }
+        if (carte == 4)
+        {
+            tab[0] = 1;
+            tab[2] = 1;
+            tab[4] = 1;
+        }
+        if (carte == 7)
+        {
+            tab[3] = 1;
+            tab[5] = 1;
+        }
+        if (carte == 6)
+        {
+            tab[0] = 1;
+            tab[2] = 1;
+            tab[4] = 1;
+        }
+        break;
+    case 2:
+        if (carte == 2 || carte == 5)
+        {
+            tab[1] = 1;
+            tab[4] = 1;
+            tab[5] = 1;
+        }
+        if (carte == 3)
+        {
+            tab[13] = 1;
+            tab[14] = 1;
+            tab[15] = 1;
+        }
+        if (carte == 4)
+        {
+            tab[1] = 1;
+            tab[5] = 1;
+        }
+        if (carte == 7)
+        {
+            tab[4] = 1;
+        }
+        if (carte == 6)
+        {
+            tab[1] = 1;
+            tab[5] = 1;
+        }
+        break;
+
+    case 3:
+        if (carte == 2 || carte == 5)
+        {
+            tab[1] = 1;
+            tab[4] = 1;
+            tab[6] = 1;
+            tab[7] = 1;
+        }
+        if (carte == 3)
+        {
+            tab[9] = 1;
+            tab[10] = 1;
+            tab[11] = 1;
+            tab[12] = 1;
+            tab[13] = 1;
+        }
+        if (carte == 4)
+        {
+            tab[0] = 1;
+            tab[4] = 1;
+            tab[6] = 1;
+        }
+        if (carte == 7)
+        {
+            tab[1] = 1;
+            tab[7] = 1;
+        }
+        if (carte == 6)
+        {
+            tab[0] = 1;
+            tab[4] = 1;
+            tab[6] = 1;
+        }
+        break;
+
+    case 4:
+        if (carte == 2 || carte == 5)
+        {
+            tab[0] = 1;
+            tab[1] = 1;
+            tab[2] = 1;
+            tab[3] = 1;
+            tab[5] = 1;
+            tab[6] = 1;
+            tab[7] = 1;
+            tab[8] = 1;
+        }
+        if (carte == 3)
+        {
+            tab[9] = 1;
+            tab[10] = 1;
+            tab[11] = 1;
+            tab[12] = 1;
+            tab[13] = 1;
+            tab[14] = 1;
+            tab[15] = 1;
+            tab[16] = 1;
+        }
+        if (carte == 4)
+        {
+            tab[1] = 1;
+            tab[3] = 1;
+            tab[5] = 1;
+            tab[7] = 1;
+        }
+        if (carte == 7)
+        {
+            tab[0] = 1;
+            tab[2] = 1;
+            tab[6] = 1;
+            tab[8] = 1;
+        }
+        if (carte == 6)
+        {
+            tab[1] = 1;
+            tab[3] = 1;
+            tab[5] = 1;
+            tab[7] = 1;
+        }
+        break;
+
+    case 5:
+        if (carte == 2 || carte == 5)
+        {
+            tab[1] = 1;
+            tab[2] = 1;
+            tab[4] = 1;
+            tab[7] = 1;
+            tab[8] = 1;
+        }
+        if (carte == 3)
+        {
+            tab[9] = 1;
+            tab[13] = 1;
+            tab[14] = 1;
+            tab[15] = 1;
+            tab[16] = 1;
+        }
+        if (carte == 4)
+        {
+            tab[2] = 1;
+            tab[4] = 1;
+            tab[8] = 1;
+        }
+        if (carte == 7)
+        {
+            tab[1] = 1;
+            tab[7] = 1;
+        }
+        if (carte == 6)
+        {
+            tab[2] = 1;
+            tab[4] = 1;
+            tab[8] = 1;
+        }
+        break;
+
+    case 6:
+        if (carte == 2 || carte == 5)
+        {
+            tab[3] = 1;
+            tab[4] = 1;
+            tab[7] = 1;
+        }
+        if (carte == 3)
+        {
+            tab[9] = 1;
+            tab[10] = 1;
+            tab[11] = 1;
+        }
+        if (carte == 4)
+        {
+            tab[3] = 1;
+            tab[7] = 1;
+        }
+        if (carte == 7)
+        {
+            tab[4] = 1;
+        }
+        if (carte == 6)
+        {
+            tab[3] = 1;
+            tab[7] = 1;
+        }
+        break;
+
+    case 7:
+        if (carte == 2 || carte == 5)
+        {
+            tab[3] = 1;
+            tab[4] = 1;
+            tab[5] = 1;
+            tab[6] = 1;
+            tab[8] = 1;
+        }
+        if (carte == 3)
+        {
+            tab[9] = 1;
+            tab[10] = 1;
+            tab[11] = 1;
+            tab[15] = 1;
+            tab[16] = 1;
+        }
+        if (carte == 4)
+        {
+            tab[4] = 1;
+            tab[6] = 1;
+            tab[8] = 1;
+        }
+        if (carte == 7)
+        {
+            tab[3] = 1;
+            tab[5] = 1;
+        }
+        if (carte == 6)
+        {
+            tab[4] = 1;
+            tab[6] = 1;
+            tab[8] = 1;
+        }
+        break;
+
+    case 8:
+        if (carte == 2 || carte == 5)
+        {
+            tab[4] = 1;
+            tab[5] = 1;
+            tab[7] = 1;
+        }
+        if (carte == 3)
+        {
+            tab[9] = 1;
+            tab[15] = 1;
+            tab[16] = 1;
+        }
+        if (carte == 4)
+        {
+            tab[5] = 1;
+            tab[7] = 1;
+        }
+        if (carte == 7)
+        {
+            tab[4] = 1;
+        }
+        if (carte == 6)
+        {
+            tab[5] = 1;
+            tab[7] = 1;
+        }
+        break;
+
     default:
         break;
     }
@@ -250,76 +564,77 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
             switch (i)
             {
             case 0:
-                printf("A1 ");
+                printf("A1");
                 break;
 
             case 1:
-                printf("B1 ");
+                printf("B1");
                 break;
 
             case 2:
-                printf("C1 ");
+                printf("C1");
                 break;
 
             case 3:
-                printf("A2 ");
+                printf("A2");
                 break;
 
             case 4:
-                printf("B2 ");
+                printf("B2");
                 break;
 
             case 5:
-                printf("C2 ");
+                printf("C2");
                 break;
 
             case 6:
-                printf("A3 ");
+                printf("A3");
                 break;
 
             case 7:
-                printf("B3 ");
+                printf("B3");
                 break;
 
             case 8:
-                printf("C3 ");
+                printf("C3");
                 break;
 
             case 9:
-                printf("↑ ");
+                printf("↑");
                 break;
 
             case 10:
-                printf("↗ ");
+                printf("↗");
                 break;
 
             case 11:
-                printf("→ ");
+                printf("→");
                 break;
 
             case 12:
-                printf("↘ ");
+                printf("↘");
                 break;
 
             case 13:
-                printf("↓ ");
+                printf("↓");
                 break;
 
             case 14:
-                printf("↙ ");
+                printf("↙");
                 break;
 
             case 15:
-                printf("← ");
+                printf("←");
                 break;
 
             case 16:
-                printf("↖ ");
+                printf("↖");
                 break;
 
             default:
                 break;
             }
+            printf(" ");
         }
     }
     printf("\n");
