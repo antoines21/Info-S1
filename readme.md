@@ -38,4 +38,9 @@ chmod +x script.sh
 
 
 ## Choses à faire
-+ Ajouter des `if` autour des `scanf` et vérifier qu'ils ne fonctionnent qu'avec la bonne valeur rentrée
+- [ ] Conflit entre Château (7) et Princesse (4, diagonale)
+- [ ] Mettre Affichage du choix des endroits d'application des pouvoirs dans le fichier `affichage.c`
+- [ ] Vérifier cohérence de tous les noms de variables et de fonctions (en fonction de l'énoncé du sujet)
+- [ ] Remplacer les chiffres par le nom des cartes dans la fonction d'affichage du tableau
+- [ ] Faire la fonction qui demande l'endroit d'application des pouvoirs
+- [ ] Faire les fonctions d'application des pouvoirs
