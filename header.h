@@ -42,5 +42,6 @@ int choix_emplacement(struct s_partisan *);                        // Cette fonc
 int choix_personnage(struct s_joueur);                                 // Choix du personnage
 
 // Fichier jeu - 2 Pouvoir des cartes
-void applique_pouvoir(struct s_partisan *, struct s_joueur, int);
-void action_roi(void);
+int demande_roi_ministre(int);
+void actions_possibles(int, int);
+void action_roi(struct s_partisan *, struct s_joueur, int);
