@@ -12,14 +12,21 @@ Le programme contient plusieurs fichiers : `main.c`, `jeu.c`, `affichage.c` et `
 
 ### Structures
 
-Pour plus de facilités, nous avons utilisé des structures dans le jeu. 
+Nous avons utilisé des structures dans le jeu. 
 + La structure `s_partisan` représente un partisan, c'est un dire un personnage qui est placé dans la cour est qui soutien l'un des deux clans. Il contient deux éléments :
   - `orientation` : une valeur `int` qui défini l'orientation du partisan (son allégence à l'un des clans). Cette valeur peut être 1 ou 2 ;
-  - `tuile` : une valeur `int` qui défini le type du personnage. Il s'agit d'une valeur entre 1 et 7. [Voir la liste des personnages](#personnages-disponibles)
+  - `personnage` : une valeur `int` qui défini le type du personnage. Il s'agit d'une valeur entre 1 et 7. [Voir la liste des personnages](#personnages-disponibles)
++ La structure `s_joueur` représente chaque joueur. Elle comporte deux éléments :
+  -  `orientation` : une valeur `int` qui définit le clan du joueur. Cette valeur peut être 1 ou 2.
+  -  
 
 ### Plateau de jeu
 
 Le plateau du jeu est représenté par un tableau de 9 cases, comprenant dans chaque case une structure nommé `s_partisan`.
+
+### Couleurs des clans
+
+Les couleurs (rouge et vert) n'ont pas de significations particulières. Nous avons utilisé ces couleurs, car leur code ASCII se suivent. 
 
 
 ## Notes sur le fonctionnement du jeu
@@ -27,16 +34,6 @@ Le plateau du jeu est représenté par un tableau de 9 cases, comprenant dans ch
 ### Règles du jeu
 
 Deux **clans** luttent pour avoir la plus grande influence dans la **cour du roi**.
-
-### Cour du roi
-
-La **cour du roi** est représentée par 
-
-+ La structure `s_partisan` est composé de 2 sous-éléments : 
-+ Les joueurs sont représentés par la structure `s_joueur`. Cette structure contient :
-  - Une valeur `int` qui défini l'orientation de la carte (1 ou 2)
-  - Un tableau de `int` qui représente le paquet de cartes du joueur
-
 
 ### Personnages disponibles 
 
@@ -87,3 +84,4 @@ chmod +x script.sh
 - [ ] Faire la fonction qui demande l'endroit d'application des pouvoirs
 - [ ] Faire les fonctions d'application des pouvoirs
 - [ ] Les nombres du plateau sont sur fond noir
+- [ ] Vérifier les espaces dans la fonction restant_demande

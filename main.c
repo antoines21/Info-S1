@@ -12,7 +12,7 @@ int main(void)
     struct s_partisan plateau[8];                 // Représente le plateau de 9 cases
     for (i = 0; i < 9; i ++){
         plateau[i].orientation = 0;
-        plateau[i].tuile = 0;
+        plateau[i].personnage = 0;
         }
     // Début du jeu
     debut(plateau, joueur_1, joueur_2);

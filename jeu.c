@@ -43,7 +43,7 @@ Cette fonction prends en paramètre le plateau de jeu, et renvoie 1 si le platea
     int c = 0;
     for (int i = 0; i < 9; i++)
     {
-        if (plateau[i].tuile == 0)
+        if (plateau[i].personnage == 0)
             c += 1;
     }
     if (c == 0) return 1;
@@ -63,7 +63,7 @@ Et fait les actions suivantes :
 - Applique le pouvoir de la carte (sauf pour citoyen et château)
 */
 {
-    plateau[emplacement].tuile = carte;
+    plateau[emplacement].personnage = carte;
     plateau[emplacement].orientation = joueur->orientation;
     joueur->cartes[carte - 1] = 0;
     actions_possibles(emplacement, carte);
@@ -114,9 +114,9 @@ Le numéro des cases en fonctions des index est de cette manière :
         index_num = convertir(index_text);
         if (index_num > 8 || strlen(index_text) > 2)
             printf("\033[1;31mLa valeur entrée est incorecte, veuillez réessayer.\033[0m\n");
-        else if (plateau[index_num].tuile != 0)
+        else if (plateau[index_num].personnage != 0)
             printf("\033[1;31mLa case est déjà utilisée, veuillez indiquer une autre case.\033[0m\n");
-    } while (index_num > 8 || strlen(index_text) > 2 || plateau[index_num].tuile != 0);
+    } while (index_num > 8 || strlen(index_text) > 2 || plateau[index_num].personnage != 0);
     return index_num;
 }
 

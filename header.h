@@ -1,9 +1,12 @@
-// Structure
+// Structures
 struct s_partisan
+/*
+Structure qui représente un personnage placé et orienté
+dans la cour du roi.
+*/
 {
-    int orientation;
-    // Orientation  possible : 1 : Clan rouge ; 2 : vert
-    int tuile;
+    int orientation; // Orientation  possible : 1 : Clan rouge ; 2 : vert
+    int personnage;
     /*
     Tuiles possibles :
     1 : Citoyen
@@ -17,12 +20,15 @@ struct s_partisan
 };
 
 struct s_joueur
+/*
+Structure qui représente un joueur
+*/
 {
     int orientation;
-    // Orientation  du joueur : 1 : Clan du haut (rouge) ; 2 : Clan du bas (vert)
+    // Orientation  du joueur : 1 : Clan rouge ; 2 : Clan vert
     int cartes[7];
     /*
-    Liste de 7 cases qui représente les cartes disponibles pour le joueur
+    Tableau de 7 cases qui représente les cartes disponibles pour le joueur
     Chaque case (0 à 6) correspond à un personnage (1 à 7). 1 = Dispo. 0 = Personnage plus dispo
     */
 };
