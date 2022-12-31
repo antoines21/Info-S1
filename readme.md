@@ -14,7 +14,6 @@ chmod +x script.sh
 ``` console
 ./script.sh
 ```
----
 ## Notes sur le fonctionnement du code
 
 + Le plateau du jeu est représenté par un tableau de 9 cases, comprenant dans chaque case une structure nommé `s_partisan`.
@@ -36,9 +35,13 @@ chmod +x script.sh
 | 6 | Général |
 | 7 | Château |
 
+## Ce que j'ai appris lors de ce projet
++ `tab*` et `tab[]` font la même choses quand ils sont paramètres de fonctions. Cependant, l'utilisation de `tab*` est recommandée
++ Une fonction ne peux pas renvoyer un tableau. Cependant, une fonction peut renvoyer une structure, qui elle peut contenir un tableau à l'intérieur
 
 ## Choses à faire
 - [ ] Conflit entre Château (7) et Princesse (4, diagonale)
+- [ ] Le tableau, ne contient pas des 0 mais des autres valeurs sur d'autres systèmes
 - [ ] Mettre Affichage du choix des endroits d'application des pouvoirs dans le fichier `affichage.c`
 - [ ] Vérifier cohérence de tous les noms de variables et de fonctions (en fonction de l'énoncé du sujet)
 - [ ] Remplacer les chiffres par le nom des cartes dans la fonction d'affichage du tableau
