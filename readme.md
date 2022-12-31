@@ -1,4 +1,62 @@
-# Notes au sujet du jeu
+# Notes au sujet du jeu « Luttes de pouvoir »
+
+## Notes sur le fonctionnement du programme
+
+### Fichiers
+
+Le programme contient plusieurs fichiers : `main.c`, `jeu.c`, `affichage.c` et `header.h`.
++ Le fichier `main.c` est celui qui est exécuté lors du lancement du jeu ;
++ Le fichier `jeu.c` contient les fonctions qui réalisent les différentes étapes du jeu ;
++ Le fichier `affichage.c` contient les fonctions d'affichages des éléments du jeu (affichage de la cour, affichage des cartes restantes) ;
++ Le fichier `header.h` qui contient toutes les déclarations des fonctions dans les fichiers `jeu.c` et `affichage.c` ainsi que la déclaration des structures `s_partisan` et `s_joueur`.
+
+### Structures
+
+Pour plus de facilités, nous avons utilisé des structures dans le jeu. 
++ La structure `s_partisan` représente un partisan, c'est un dire un personnage qui est placé dans la cour est qui soutien l'un des deux clans. Il contient deux éléments :
+  - `orientation` : une valeur `int` qui défini l'orientation du partisan (son allégence à l'un des clans). Cette valeur peut être 1 ou 2 ;
+  - `tuile` : une valeur `int` qui défini le type du personnage. Il s'agit d'une valeur entre 1 et 7. [Voir la liste des personnages](#personnages-disponibles)
+
+### Plateau de jeu
+
+Le plateau du jeu est représenté par un tableau de 9 cases, comprenant dans chaque case une structure nommé `s_partisan`.
+
+
+## Notes sur le fonctionnement du jeu
+
+### Règles du jeu
+
+Deux **clans** luttent pour avoir la plus grande influence dans la **cour du roi**.
+
+### Cour du roi
+
+La **cour du roi** est représentée par 
+
++ La structure `s_partisan` est composé de 2 sous-éléments : 
++ Les joueurs sont représentés par la structure `s_joueur`. Cette structure contient :
+  - Une valeur `int` qui défini l'orientation de la carte (1 ou 2)
+  - Un tableau de `int` qui représente le paquet de cartes du joueur
+
+
+### Personnages disponibles 
+
+| Numéro | Nom       |
+| ------ | --------- |
+| 1      | Citoyen   |
+| 2      | Roi       |
+| 3      | Reine     |
+| 4      | Princesse |
+| 5      | Ministre  |
+| 6      | Général   |
+| 7      | Château   |
+
+
+## Glossaire
++ **Cour** : Grille *3x3* qui représente la cour du roi. Les partisans sont placés dans cette cour ;
++ **Partisan** : Personnage qui est placé dans la cour et qui soutient l'un des deux clans ;
++ **Personnage** : Type de partisan (citoyen, roi, reine, etc..)
++ **Orientation** : Appartenance de la carte à l'un des deux clans.
+
 ## Compilation et exécution
 
 Pour compiler et exécuter le jeu automatique
@@ -14,28 +72,7 @@ chmod +x script.sh
 ``` console
 ./script.sh
 ```
-## Notes sur le fonctionnement du code
 
-+ Le plateau du jeu est représenté par un tableau de 9 cases, comprenant dans chaque case une structure nommé `s_partisan`.
-+ La structure `s_partisan` est composé de 2 sous-éléments : 
-  - Une valeur qui défini l'orientation de la carte (son allégence). Cette valeur est un `int` qui peut prendre deux valeurs : 1 ou 2.
-  - Une valeur qui défini le personnage. Une valeur `int` entre 1 et 7.
-+ Les joueurs sont représentés par la structure `s_joueur`. Cette structure contient :
-  - Une valeur `int` qui défini l'orientation de la carte (1 ou 2)
-  - Un tableau de `int` qui représente le paquet de cartes du joueur
-
-
-### Persoonnages disponibles 
-
-| Numéro | Nom |
-| ------ | ----------- |
-| 1 | Citoyen |
-| 2 | Roi |
-| 3 | Reine |
-| 4 | Princesse |
-| 5 | Ministre |
-| 6 | Général |
-| 7 | Château |
 
 ## Ce que j'ai appris lors de ce projet
 + `tab*` et `tab[]` font la même choses quand ils sont paramètres de fonctions. Cependant, l'utilisation de `tab*` est recommandée
@@ -43,9 +80,10 @@ chmod +x script.sh
 
 ## Choses à faire
 - [ ] Conflit entre Château (7) et Princesse (4, diagonale)
-- [ ] Le tableau, ne contient pas des 0 mais des autres valeurs sur d'autres systèmes
+- [x] Le tableau, ne contient pas des 0 mais des autres valeurs sur d'autres systèmes
 - [ ] Mettre Affichage du choix des endroits d'application des pouvoirs dans le fichier `affichage.c`
 - [ ] Vérifier cohérence de tous les noms de variables et de fonctions (en fonction de l'énoncé du sujet)
 - [ ] Remplacer les chiffres par le nom des cartes dans la fonction d'affichage du tableau
 - [ ] Faire la fonction qui demande l'endroit d'application des pouvoirs
 - [ ] Faire les fonctions d'application des pouvoirs
+- [ ] Les nombres du plateau sont sur fond noir

@@ -1,23 +1,6 @@
 #include <stdio.h>
 #include "header.h"
 
-void grille(int *tab, int *a)
-{
-    /*
-    for (int i = 0; i < 18; i++)
-    {
-        printf("%d\n", tab[i]);
-    }
-    */
-   *a = 2;
-
-}
-
-void gril(struct s_partisan x)
-{
-    printf("L'all est : %d\n", x.orientation);
-}
-
 void aff_plateau(struct s_partisan *plateau)
 /*
 Cette fonction affiche le tableau du jeu, la couleur change en fonction de l'orientation de la carte (en développement).

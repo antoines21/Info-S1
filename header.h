@@ -2,7 +2,7 @@
 struct s_partisan
 {
     int orientation;
-    // Orientation  possible : 1 : Clan du haut (rouge) ; 2 : Clan du bas (vert)
+    // Orientation  possible : 1 : Clan rouge ; 2 : vert
     int tuile;
     /*
     Tuiles possibles :
@@ -22,24 +22,22 @@ struct s_joueur
     // Orientation  du joueur : 1 : Clan du haut (rouge) ; 2 : Clan du bas (vert)
     int cartes[7];
     /*
-    Liste de 7 cases qui représente les cartes disponible pour le joueur
+    Liste de 7 cases qui représente les cartes disponibles pour le joueur
     Chaque case (0 à 6) correspond à un personnage (1 à 7). 1 = Dispo. 0 = Personnage plus dispo
     */
 };
 
 // Fonctions dans le fichier affichage
-void grille(int *, int *);
-void gril(struct s_partisan);
-void restant(struct s_joueur);                   // Fonction qui affiche au joueur ces cartes restantes
+void restant(struct s_joueur); // Fonction qui affiche au joueur ses cartes restantes
 void restant_demande(struct s_joueur);
 void aff_plateau(struct s_partisan *); // Cette fonction affiche le tableau du jeu
 
 // Fichier jeu - 1 Général
-void debut(struct s_partisan *, struct s_joueur, struct s_joueur);               // Fonction du début du jeu
+void debut(struct s_partisan *, struct s_joueur, struct s_joueur);  // Fonction du début du jeu
 void place_carte(struct s_partisan *, struct s_joueur *, int, int); // Fonction qui place une carte sur le plateau et l'enlève de la liste
-int convertir(char *);                                       // Convertir des coordonnées passées en paramètre en un index pour le tableau du plateau
-int choix_emplacement(struct s_partisan *);                        // Cette fonction demande l'index et le renvoie
-int choix_personnage(struct s_joueur);                                 // Choix du personnage
+int convertir(char *);                                              // Convertir des coordonnées passées en paramètre en un index pour le tableau du plateau
+int choix_emplacement(struct s_partisan *);                         // Cette fonction demande l'index et le renvoie
+int choix_personnage(struct s_joueur);                              // Choix du personnage
 int est_plein(struct s_partisan *);
 
 // Fichier jeu - 2 Pouvoir des cartes
