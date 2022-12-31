@@ -20,7 +20,9 @@ chmod +x script.sh
 + La structure `s_partisan` est composé de 2 sous-éléments : 
   - Une valeur qui défini l'orientation de la carte (son allégence). Cette valeur est un `int` qui peut prendre deux valeurs : 1 ou 2.
   - Une valeur qui défini le personnage. Une valeur `int` entre 1 et 7.
-
++ Les joueurs sont représentés par la structure `s_joueur`. Cette structure contient :
+  - Une valeur `int` qui défini l'orientation de la carte (1 ou 2)
+  - Un tableau de `int` qui représente le paquet de cartes du joueur
 
 
 ### Persoonnages disponibles 
