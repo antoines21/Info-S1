@@ -37,6 +37,7 @@ Structure qui représente un joueur
 void restant(struct s_joueur); // Fonction qui affiche au joueur ses cartes restantes
 void restant_demande(struct s_joueur);
 void aff_plateau(struct s_partisan *); // Cette fonction affiche le tableau du jeu
+void affichage_actions_possibles(int*, int); // Affichage des zones d'applications
 
 // Fichier jeu - 1 Général
 void debut(struct s_partisan *, struct s_joueur, struct s_joueur);  // Fonction du début du jeu

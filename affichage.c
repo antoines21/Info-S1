@@ -122,3 +122,94 @@ Les 7 cartes ont leur place définies (index 0 à 6 dans la liste). Si la carte 
     }
     printf("\n");
 }
+
+void affichage_actions_possibles(int* tab, int carte)
+/*
+Cette fonction affiche les zones d'application possibles pour les pouvoirs des personnages.
+*/
+{
+    int i;
+    if (carte > 1 && carte < 9 && carte != 7)
+    printf("Vous pouvez faire : ");
+    for (i = 0; i < 17; i++)
+    {
+        if (tab[i] == 1)
+        {
+            switch (i)
+            {
+            case 0:
+                printf("A1");
+                break;
+
+            case 1:
+                printf("B1");
+                break;
+
+            case 2:
+                printf("C1");
+                break;
+
+            case 3:
+                printf("A2");
+                break;
+
+            case 4:
+                printf("B2");
+                break;
+
+            case 5:
+                printf("C2");
+                break;
+
+            case 6:
+                printf("A3");
+                break;
+
+            case 7:
+                printf("B3");
+                break;
+
+            case 8:
+                printf("C3");
+                break;
+
+            case 9:
+                printf("↑");
+                break;
+
+            case 10:
+                printf("↗");
+                break;
+
+            case 11:
+                printf("→");
+                break;
+
+            case 12:
+                printf("↘");
+                break;
+
+            case 13:
+                printf("↓");
+                break;
+
+            case 14:
+                printf("↙");
+                break;
+
+            case 15:
+                printf("←");
+                break;
+
+            case 16:
+                printf("↖");
+                break;
+
+            default:
+                break;
+            }
+            printf(" ");
+        }
+    }
+    printf("\n");
+}

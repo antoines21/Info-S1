@@ -246,7 +246,7 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
             }
         } while (v != 1 || choix < 1 || choix > 2);
         if (choix == 2)
-            carte = 7;
+            carte = 8;
     }
     switch (emplacement)
     {
@@ -268,7 +268,7 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
             tab[1] = 1;
             tab[3] = 1;
         }
-        if (carte == 7)
+        if (carte == 8)
         {
             tab[4] = 1;
         }
@@ -302,7 +302,7 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
             tab[2] = 1;
             tab[4] = 1;
         }
-        if (carte == 7)
+        if (carte == 8)
         {
             tab[3] = 1;
             tab[5] = 1;
@@ -332,7 +332,7 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
             tab[1] = 1;
             tab[5] = 1;
         }
-        if (carte == 7)
+        if (carte == 8)
         {
             tab[4] = 1;
         }
@@ -365,7 +365,7 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
             tab[4] = 1;
             tab[6] = 1;
         }
-        if (carte == 7)
+        if (carte == 8)
         {
             tab[1] = 1;
             tab[7] = 1;
@@ -408,7 +408,7 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
             tab[5] = 1;
             tab[7] = 1;
         }
-        if (carte == 7)
+        if (carte == 8)
         {
             tab[0] = 1;
             tab[2] = 1;
@@ -447,7 +447,7 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
             tab[4] = 1;
             tab[8] = 1;
         }
-        if (carte == 7)
+        if (carte == 8)
         {
             tab[1] = 1;
             tab[7] = 1;
@@ -478,7 +478,7 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
             tab[3] = 1;
             tab[7] = 1;
         }
-        if (carte == 7)
+        if (carte == 8)
         {
             tab[4] = 1;
         }
@@ -512,7 +512,7 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
             tab[6] = 1;
             tab[8] = 1;
         }
-        if (carte == 7)
+        if (carte == 8)
         {
             tab[3] = 1;
             tab[5] = 1;
@@ -543,7 +543,7 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
             tab[5] = 1;
             tab[7] = 1;
         }
-        if (carte == 7)
+        if (carte == 8)
         {
             tab[4] = 1;
         }
@@ -557,85 +557,5 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
     default:
         break;
     }
-    for (i = 0; i < 17; i++)
-    {
-        if (tab[i] == 1)
-        {
-            switch (i)
-            {
-            case 0:
-                printf("A1");
-                break;
-
-            case 1:
-                printf("B1");
-                break;
-
-            case 2:
-                printf("C1");
-                break;
-
-            case 3:
-                printf("A2");
-                break;
-
-            case 4:
-                printf("B2");
-                break;
-
-            case 5:
-                printf("C2");
-                break;
-
-            case 6:
-                printf("A3");
-                break;
-
-            case 7:
-                printf("B3");
-                break;
-
-            case 8:
-                printf("C3");
-                break;
-
-            case 9:
-                printf("↑");
-                break;
-
-            case 10:
-                printf("↗");
-                break;
-
-            case 11:
-                printf("→");
-                break;
-
-            case 12:
-                printf("↘");
-                break;
-
-            case 13:
-                printf("↓");
-                break;
-
-            case 14:
-                printf("↙");
-                break;
-
-            case 15:
-                printf("←");
-                break;
-
-            case 16:
-                printf("↖");
-                break;
-
-            default:
-                break;
-            }
-            printf(" ");
-        }
-    }
-    printf("\n");
+    affichage_actions_possibles(tab, carte);
 }
