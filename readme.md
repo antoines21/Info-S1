@@ -75,6 +75,7 @@ chmod +x script.sh
 + `tab*` et `tab[]` font la même choses quand ils sont paramètres de fonctions. Cependant, l'utilisation de `tab*` est recommandée
 + Une fonction ne peux pas renvoyer un tableau. Cependant, une fonction peut renvoyer une structure, qui elle peut contenir un tableau à l'intérieur
 + `scanf("%*[^\n]");` Pour initialiser la valeur de saisie
++ Il est important de nommer les variables et des fonctions avec des noms cohérent et précis dès le début de la programmation
 
 ## Pistes d'amélioration
 

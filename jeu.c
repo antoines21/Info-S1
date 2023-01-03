@@ -520,21 +520,39 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
         break;
     }
     affichage_actions_possibles(tab, carte);
-    if (carte == 2 || carte == 5 || carte == 6) // Roi, Ministre et Général
-    {
-        int a = choix_roi_ministre_general(tab); // Retourne une valeur entre 0 et 8
-        if (carte == 2)
-            action_roi(plateau, a);
-        // if (carte == 5)
-    }
 
-    if (carte == 3) // Reine
+    switch (carte)
     {
+    case 2: // Roi
+        action_detruire(plateau, choix_roi_ministre_general(tab));
+        break;
+
+    case 3:                       // Reine
         int a = choix_reine(tab); // Retourne une valeur entre 1 et 8
-    }
+        break;
 
-    if (carte == 4) // Princesse
-    {
+    case 4: // Princesse - Orthogonale
+        for (i = 0; i< 9;i++){
+            if (tab[i] == 1){
+                action_pivoter(plateau, i);
+            }
+        }
+        break;
+
+    case 5: // Ministre
+        action_pivoter(plateau, choix_roi_ministre_general(tab));
+        break;
+
+    case 6: // Général
+        action_detruire(plateau, choix_roi_ministre_general(tab));
+        break;
+
+    case 8: // Princesse - Diagonale
+        // action_roi(plateau, choix_roi_ministre_general(tab));
+        break;
+
+    default:
+        break;
     }
 }
 
@@ -590,9 +608,9 @@ Et renvoie :
     return p;
 }
 
-void action_roi(struct s_partisan *plateau, int emplacement)
+void action_detruire(struct s_partisan *plateau, int emplacement)
 /*
-Le roi détruit une des 8 tuiles adjacentes
+Le roi détruit 1 des 8 tuiles adjacentes
 La fonction prends en paramètre :
 - Le plateau du jeu
 - La case d'application du pouvoir, choisie par le joueur qui a posé la carte
@@ -603,6 +621,19 @@ La fonction prends en paramètre :
         plateau[emplacement].orientation = 0;
         plateau[emplacement].personnage = 0;
     }
-    else
-        printf("Le château est immunisé contre les attaques.\n");
+}
+
+void action_pivoter(struct s_partisan *plateau, int emplacement)
+/*
+Le mnistre pivote 1 des 8 tuiles adjacentes
+La fonction prends en paramètre :
+- Le plateau du jeu
+- La case d'application du pouvoir, choisie par le joueur qui a posé la carte
+*/
+{
+    if (plateau[emplacement].personnage != 7 && plateau[emplacement].orientation != 0)
+    {
+
+        plateau[emplacement].orientation = plateau[emplacement].orientation % 2 + 1;
+    }
 }
