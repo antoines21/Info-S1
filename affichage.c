@@ -31,7 +31,7 @@ Les 7 cartes ont leur place définies (index 0 à 6 dans la liste). Si la carte 
     {
         if (j.cartes[i] == 1)
         {
-            printf("\033[1;%dm", 30+i);
+            printf("\033[1;%dm", 30 + i);
             switch (i)
             {
             case 0:
@@ -83,7 +83,7 @@ Les 7 cartes ont leur place définies (index 0 à 6 dans la liste). Si la carte 
     {
         if (j.cartes[i] == 1)
         {
-            printf("\033[1;%dm%d ", 30+i,i+1);
+            printf("\033[1;%dm%d ", 30 + i, i + 1);
             switch (i)
             {
             case 0:
@@ -123,92 +123,99 @@ Les 7 cartes ont leur place définies (index 0 à 6 dans la liste). Si la carte 
     printf("\n");
 }
 
-void affichage_actions_possibles(int* tab, int carte)
+void affichage_actions_possibles(int *tab, int carte)
 /*
 Cette fonction affiche les zones d'application possibles pour les pouvoirs des personnages.
+Les personnages qui demandent une une case ou une direction en fonction de la case sur lequels ils ont été posé sont :
+2 - Roi
+3 - Reine
+5 - Ministre
+6 - Général
 */
 {
-    int i;
-    if (carte > 1 && carte < 9 && carte != 7)
-    printf("Vous pouvez faire : ");
-    for (i = 0; i < 17; i++)
+    if (carte > 1 && carte < 7 && carte != 4)
     {
-        if (tab[i] == 1)
+        int i;
+        printf("vous pouvez appliquer votre pouvoir sur les cases suivantes : ");
+        for (i = 0; i < 17; i++)
         {
-            switch (i)
+            if (tab[i] == 1)
             {
-            case 0:
-                printf("A1");
-                break;
+                switch (i)
+                {
+                case 0:
+                    printf("A1");
+                    break;
 
-            case 1:
-                printf("B1");
-                break;
+                case 1:
+                    printf("B1");
+                    break;
 
-            case 2:
-                printf("C1");
-                break;
+                case 2:
+                    printf("C1");
+                    break;
 
-            case 3:
-                printf("A2");
-                break;
+                case 3:
+                    printf("A2");
+                    break;
 
-            case 4:
-                printf("B2");
-                break;
+                case 4:
+                    printf("B2");
+                    break;
 
-            case 5:
-                printf("C2");
-                break;
+                case 5:
+                    printf("C2");
+                    break;
 
-            case 6:
-                printf("A3");
-                break;
+                case 6:
+                    printf("A3");
+                    break;
 
-            case 7:
-                printf("B3");
-                break;
+                case 7:
+                    printf("B3");
+                    break;
 
-            case 8:
-                printf("C3");
-                break;
+                case 8:
+                    printf("C3");
+                    break;
 
-            case 9:
-                printf("↑");
-                break;
+                case 9:
+                    printf("%d ↑", i-8);
+                    break;
 
-            case 10:
-                printf("↗");
-                break;
+                case 10:
+                    printf("%d ↗", i-8);
+                    break;
 
-            case 11:
-                printf("→");
-                break;
+                case 11:
+                    printf("%d →", i-8);
+                    break;
 
-            case 12:
-                printf("↘");
-                break;
+                case 12:
+                    printf("%d ↘", i-8);
+                    break;
 
-            case 13:
-                printf("↓");
-                break;
+                case 13:
+                    printf("%d ↓", i-8);
+                    break;
 
-            case 14:
-                printf("↙");
-                break;
+                case 14:
+                    printf("%d ↙", i-8);
+                    break;
 
-            case 15:
-                printf("←");
-                break;
+                case 15:
+                    printf("%d ←", i-8);
+                    break;
 
-            case 16:
-                printf("↖");
-                break;
+                case 16:
+                    printf("%d ↖", i-8);
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
+                }
+                printf(" ");
             }
-            printf(" ");
         }
     }
     printf("\n");

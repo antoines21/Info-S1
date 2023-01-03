@@ -48,6 +48,7 @@ int choix_personnage(struct s_joueur);                              // Choix du 
 int est_plein(struct s_partisan *);
 
 // Fichier jeu - 2 Pouvoir des cartes
-int demande_roi_ministre(int);
-void actions_possibles(int, int);
+void action(struct s_partisan *, struct s_joueur, int, int);
+int choix_roi_ministre_general(int *);
+int choix_reine(int *);
 void action_roi(struct s_partisan *, struct s_joueur, int);

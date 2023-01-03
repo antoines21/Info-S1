@@ -76,8 +76,12 @@ chmod +x script.sh
 + Une fonction ne peux pas renvoyer un tableau. Cependant, une fonction peut renvoyer une structure, qui elle peut contenir un tableau à l'intérieur
 + `scanf("%*[^\n]");` Pour initialiser la valeur de saisie
 
+## Pistes d'amélioration
+
++ Nous aurions pu utiliser des structures pour définir de manière harmonisée les personnages et leurs pouvoirs (au lieu d'utiliser un grand nombre d'opérateur logique).
+
 ## Choses à faire
-- [ ] Conflit entre Château (7) et Princesse (4, diagonale)
+- [x] Conflit entre Château (7) et Princesse (4, diagonale)
 - [x] Le tableau, ne contient pas des 0 mais des autres valeurs sur d'autres systèmes
 - [x] Mettre Affichage du choix des endroits d'application des pouvoirs dans le fichier `affichage.c`
 - [ ] Vérifier cohérence de tous les noms de variables et de fonctions (en fonction de l'énoncé du sujet)

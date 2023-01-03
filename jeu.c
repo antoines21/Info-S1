@@ -9,7 +9,8 @@ Elle commence une partie du jeu. Le premier joueur place une carte citoyen au pr
 */
 {
     int i = 0;
-    do{
+    do
+    {
         printf("\033[44mTour %d\033[0m", i + 1);
         printf(" ");
         printf("\033[%dmJoueur %d\033[0m\n", 40 + i % 2 + 1, i % 2 + 1);
@@ -32,7 +33,7 @@ Elle commence une partie du jeu. Le premier joueur place une carte citoyen au pr
             place_carte(plateau, &j_1, choix_emplacement(plateau), 1);
         }
         i += 1;
-    } while(est_plein(plateau) != 1);
+    } while (est_plein(plateau) != 1);
 }
 
 int est_plein(struct s_partisan *plateau)
@@ -46,8 +47,10 @@ Cette fonction prends en paramètre le plateau de jeu, et renvoie 1 si le platea
         if (plateau[i].personnage == 0)
             c += 1;
     }
-    if (c == 0) return 1;
-    else return 0;
+    if (c == 0)
+        return 1;
+    else
+        return 0;
 }
 
 void place_carte(struct s_partisan *plateau, struct s_joueur *joueur, int emplacement, int carte)
@@ -66,28 +69,7 @@ Et fait les actions suivantes :
     plateau[emplacement].personnage = carte;
     plateau[emplacement].orientation = joueur->orientation;
     joueur->cartes[carte - 1] = 0;
-    actions_possibles(emplacement, carte);
-    switch (carte)
-    {
-    case 2:
-        // action_roi(plateau, *joueur, emplacement);
-        printf("Action du roi\n");
-        break;
-    case 3:
-        printf("Action de la reine\n");
-        break;
-    case 4:
-        printf("Action de la princesse\n");
-        break;
-    case 5:
-        printf("Action du ministre\n");
-        break;
-    case 6:
-        printf("Action du général\n");
-        break;
-    default:
-        break;
-    }
+    action(plateau, *joueur, emplacement, carte);
 }
 
 int choix_emplacement(struct s_partisan *plateau)
@@ -190,38 +172,7 @@ valeur rentrée est incorecte.
     return p;
 }
 
-void action_roi(struct s_partisan *plateau, struct s_joueur joueur, int emplacement)
-/*
-Affiche les cases possibles pour l'action du roi.
-La fonction prends en paramètre :
-- Le plateau du jeu
-- Le joueur qui a posé la carte
-- L'emplacement sur lequel a été posé la carte
-*/
-{
-    printf("La carte a été mise sur la place %d.\n", emplacement);
-}
-
-int demande_roi_ministre(int emplacement)
-/*
-Cette fonction prends en paramètre l'emplacement sur lequel a été posé la carte, et demande au joueur sur quelle case
-il veut appliquer le pouvoir. La fonction renvoie l'index sous forme numérique (0 à 8).
-*/
-{
-    int index_num;
-    char index_text[255];
-    do
-    {
-        printf("Coordonnées où vous souhaitez appliquer le pouvoir (ex : A1, B3): ");
-        scanf("%s", index_text);
-        index_num = convertir(index_text);
-        if (index_num > 8 || strlen(index_text) > 2)
-            printf("\033[1;31mLa valeur entrée est incorecte, veuillez réessayer.\033[0m\n");
-    } while (index_num > 8 || strlen(index_text) > 2);
-    return index_num;
-}
-
-void actions_possibles(int emplacement, int carte)
+void action(struct s_partisan *plateau, struct s_joueur joueur, int emplacement, int carte)
 /*
 Cette fonction prends en paramètre :
 - L'emplacement de la carte posée
@@ -248,6 +199,17 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
         if (choix == 2)
             carte = 8;
     }
+    /*
+    1 - Citoyen
+    2 - Roi
+    3 - Reine
+    4 - Princesse - Orthogonal
+    5 - Ministre
+    6 - Général
+    7 - Château
+    8 - Princesse - Diagonale
+    */
+
     switch (emplacement)
     {
     case 0:
@@ -558,4 +520,83 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
         break;
     }
     affichage_actions_possibles(tab, carte);
+    if (carte == 2 || carte == 5 || carte == 6) // Roi, Ministre et Général
+    {
+        int a = choix_roi_ministre_general(tab); // Retourne une valeur entre 0 et 8
+        action_roi(plateau, joueur, emplacement);
+    }
+
+    if (carte == 3) // Reine
+    {
+        int a = choix_reine(tab); // Retourne une valeur entre 1 et 8
+    }
+
+    if (carte == 4) // Princesse
+    {
+        
+    }
+}
+
+int choix_roi_ministre_general(int *tab)
+/*
+Cette fonction prends en paramètre :
+- Le tableau des cases possibles (tableau de 17 cases, mais uniquement les cases 0 à 8 nous interessent)
+Et renvoie :
+- L'index numérique de la case sur laquelle nous allons appliquer le pouvoir (valeur entre 0 et 8)
+*/
+{
+    int index_num;
+    char index_text[255];
+    do
+    {
+        printf("Coordonnées où vous souhaitez appliquer le pouvoir (ex : A1, B3): ");
+        scanf("%s", index_text);
+        index_num = convertir(index_text);
+        if (index_num > 8 || strlen(index_text) > 2)
+            printf("\033[1;31mLa valeur entrée est incorecte, veuillez réessayer.\033[0m\n");
+        else if (tab[index_num] != 1)
+            printf("\033[1;31mVous ne pouvez pas appliquer le pouvoir sur cette case. Veuillez indiquer une autre case.\033[0m\n");
+    } while (index_num > 8 || strlen(index_text) > 2 || tab[index_num] != 1);
+    return index_num;
+}
+
+int choix_reine(int *tab)
+/*
+Cette fonction prends en paramètre :
+- Le tableau des cases possibles (tableau de 17 cases, mais uniquement les cases 9 à 16 nous interessent)
+Et renvoie :
+- Le numéro de la direction choisie (une valeur entre 1 et 8)
+*/
+{
+
+    int p, v;
+    do
+
+    {
+        printf("Numéro de la direction choisie : ");
+        v = scanf("%d", &p);
+        if (v != 1 || p < 1 || p > 8)
+        {
+            printf("\033[1;31mLa valeur entrée est incorecte, veuillez réessayer.\033[0m\n");
+            scanf("%*[^\n]"); // Pour initialiser la zone de saisie
+        }
+        else if (tab[p + 8] != 1)
+        {
+            printf("\033[1;31mVous ne pouvez pas choisir cette direction. Veuillez choisir une autre direction.\033[0m\n");
+            scanf("%*[^\n]"); // Pour initialiser la zone de saisie
+        }
+    } while (v != 1 || p < 1 || p > 7 || tab[p + 8] != 1);
+    return p;
+}
+
+void action_roi(struct s_partisan *plateau, struct s_joueur joueur, int emplacement)
+/*
+Affiche les cases possibles pour l'action du roi.
+La fonction prends en paramètre :
+- Le plateau du jeu
+- Le joueur qui a posé la carte
+- L'emplacement sur lequel a été posé la carte
+*/
+{
+    printf("La carte a été mise sur la place %d.\n", emplacement);
 }
