@@ -79,6 +79,7 @@ chmod +x script.sh
 ## Pistes d'amélioration
 
 + Nous aurions pu utiliser des structures pour définir de manière harmonisée les personnages et leurs pouvoirs (au lieu d'utiliser un grand nombre d'opérateur logique).
++ Trouver une meilleure manière de proposer les cases possibles pour l'application du pouvoir (notre version ne prends pas en compte les cases vides ou le château)
 
 ## Choses à faire
 - [x] Conflit entre Château (7) et Princesse (4, diagonale)
@@ -90,3 +91,5 @@ chmod +x script.sh
 - [ ] Faire les fonctions d'application des pouvoirs
 - [ ] Les nombres du plateau sont sur fond noir
 - [ ] Vérifier les espaces dans la fonction restant_demande
+- [ ] Mise en forme graphique de la grille
+- [ ] Peut-être : Utiliser un fichier texte pour enregistrer les stats sur le jeu (gagant, nombre de coup, etc...)

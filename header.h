@@ -51,4 +51,4 @@ int est_plein(struct s_partisan *);
 void action(struct s_partisan *, struct s_joueur, int, int);
 int choix_roi_ministre_general(int *);
 int choix_reine(int *);
-void action_roi(struct s_partisan *, struct s_joueur, int);
+void action_roi(struct s_partisan *, int);

@@ -188,7 +188,7 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
         int v, choix;
         do
         {
-            printf("Orthogonale tapez 1, diagonale tapez 2 : ");
+            printf("Pivoter les tuiles orthogonales tapez 1, diagonales tapez 2 : ");
             v = scanf("%d", &choix);
             if (v != 1 || choix < 1 || choix > 2)
             {
@@ -523,7 +523,9 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
     if (carte == 2 || carte == 5 || carte == 6) // Roi, Ministre et Général
     {
         int a = choix_roi_ministre_general(tab); // Retourne une valeur entre 0 et 8
-        action_roi(plateau, joueur, emplacement);
+        if (carte == 2)
+            action_roi(plateau, a);
+        // if (carte == 5)
     }
 
     if (carte == 3) // Reine
@@ -533,7 +535,6 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
 
     if (carte == 4) // Princesse
     {
-        
     }
 }
 
@@ -589,14 +590,19 @@ Et renvoie :
     return p;
 }
 
-void action_roi(struct s_partisan *plateau, struct s_joueur joueur, int emplacement)
+void action_roi(struct s_partisan *plateau, int emplacement)
 /*
-Affiche les cases possibles pour l'action du roi.
+Le roi détruit une des 8 tuiles adjacentes
 La fonction prends en paramètre :
 - Le plateau du jeu
-- Le joueur qui a posé la carte
-- L'emplacement sur lequel a été posé la carte
+- La case d'application du pouvoir, choisie par le joueur qui a posé la carte
 */
 {
-    printf("La carte a été mise sur la place %d.\n", emplacement);
+    if (plateau[emplacement].personnage != 7)
+    {
+        plateau[emplacement].orientation = 0;
+        plateau[emplacement].personnage = 0;
+    }
+    else
+        printf("Le château est immunisé contre les attaques.\n");
 }
