@@ -11,28 +11,18 @@ Elle commence une partie du jeu. Le premier joueur place une carte citoyen au pr
     int i = 0;
     do
     {
-        printf("\033[44mTour %d\033[0m", i + 1);
-        printf(" ");
-        printf("\033[%dmJoueur %d\033[0m\n", 40 + i % 2 + 1, i % 2 + 1);
+        printf("\033[44mTour %d\033[0m \033[%dmJoueur %d\033[0m\n", i + 1, 40 + i % 2 + 1, i % 2 + 1); // Affichage n°tour et n°joueur
         aff_plateau(plateau);
         if (i != 0)
         {
-            if (i % 2 + 1 == 1)
-            {
-
-                place_carte(plateau, &j_1, choix_emplacement(plateau), choix_personnage(j_1));
-            }
-            else
-            {
-                place_carte(plateau, &j_2, choix_emplacement(plateau), choix_personnage(j_2));
-            }
+            i % 2 + 1 == 1 ? place_carte(plateau, &j_1, choix_emplacement(plateau), choix_personnage(j_1)) : place_carte(plateau, &j_2, choix_emplacement(plateau), choix_personnage(j_2));
         }
         else
         {
             printf("Le joueur 1 pose la carte citoyen.\n");
             place_carte(plateau, &j_1, choix_emplacement(plateau), 1);
         }
-        i += 1;
+        i++;
     } while (est_plein(plateau) != 1);
 }
 
@@ -183,31 +173,14 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
     int tab[17], i;
     for (i = 0; i < 17; tab[i++] = 0)
         ;
-    if (carte == 4)
-    {
-        int v, choix;
-        do
-        {
-            printf("Pivoter les tuiles orthogonales tapez 1, diagonales tapez 2 : ");
-            v = scanf("%d", &choix);
-            if (v != 1 || choix < 1 || choix > 2)
-            {
-                printf("\033[1;31mLa valeur entrée est incorecte, veuillez réessayer.\033[0m\n");
-                scanf("%*[^\n]"); // Pour initialiser la zone de saisie
-            }
-        } while (v != 1 || choix < 1 || choix > 2);
-        if (choix == 2)
-            carte = 8;
-    }
     /*
     1 - Citoyen
     2 - Roi
     3 - Reine
-    4 - Princesse - Orthogonal
+    4 - Princesse - 1 : Orthogonal - 2 : Diagonal
     5 - Ministre
     6 - Général
     7 - Château
-    8 - Princesse - Diagonale
     */
 
     switch (emplacement)
@@ -229,10 +202,7 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
         {
             tab[1] = 1;
             tab[3] = 1;
-        }
-        if (carte == 8)
-        {
-            tab[4] = 1;
+            tab[4] = 2;
         }
         if (carte == 6)
         {
@@ -263,11 +233,8 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
             tab[0] = 1;
             tab[2] = 1;
             tab[4] = 1;
-        }
-        if (carte == 8)
-        {
-            tab[3] = 1;
-            tab[5] = 1;
+            tab[3] = 2;
+            tab[5] = 2;
         }
         if (carte == 6)
         {
@@ -293,10 +260,7 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
         {
             tab[1] = 1;
             tab[5] = 1;
-        }
-        if (carte == 8)
-        {
-            tab[4] = 1;
+            tab[4] = 2;
         }
         if (carte == 6)
         {
@@ -326,11 +290,8 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
             tab[0] = 1;
             tab[4] = 1;
             tab[6] = 1;
-        }
-        if (carte == 8)
-        {
-            tab[1] = 1;
-            tab[7] = 1;
+            tab[1] = 2;
+            tab[7] = 2;
         }
         if (carte == 6)
         {
@@ -369,13 +330,10 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
             tab[3] = 1;
             tab[5] = 1;
             tab[7] = 1;
-        }
-        if (carte == 8)
-        {
-            tab[0] = 1;
-            tab[2] = 1;
-            tab[6] = 1;
-            tab[8] = 1;
+            tab[0] = 2;
+            tab[2] = 2;
+            tab[6] = 2;
+            tab[8] = 2;
         }
         if (carte == 6)
         {
@@ -408,11 +366,8 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
             tab[2] = 1;
             tab[4] = 1;
             tab[8] = 1;
-        }
-        if (carte == 8)
-        {
-            tab[1] = 1;
-            tab[7] = 1;
+            tab[1] = 2;
+            tab[7] = 2;
         }
         if (carte == 6)
         {
@@ -439,10 +394,7 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
         {
             tab[3] = 1;
             tab[7] = 1;
-        }
-        if (carte == 8)
-        {
-            tab[4] = 1;
+            tab[4] = 2;
         }
         if (carte == 6)
         {
@@ -473,11 +425,8 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
             tab[4] = 1;
             tab[6] = 1;
             tab[8] = 1;
-        }
-        if (carte == 8)
-        {
-            tab[3] = 1;
-            tab[5] = 1;
+            tab[3] = 2;
+            tab[5] = 2;
         }
         if (carte == 6)
         {
@@ -504,10 +453,7 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
         {
             tab[5] = 1;
             tab[7] = 1;
-        }
-        if (carte == 8)
-        {
-            tab[4] = 1;
+            tab[4] = 2;
         }
         if (carte == 6)
         {
@@ -531,9 +477,24 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
         int a = choix_reine(tab); // Retourne une valeur entre 1 et 8
         break;
 
-    case 4: // Princesse - Orthogonale
-        for (i = 0; i< 9;i++){
-            if (tab[i] == 1){
+    case 4: // Princesse
+
+        int v, choix;
+        do
+        {
+            printf("Pivoter les tuiles orthogonales tapez 1, diagonales tapez 2 : ");
+            v = scanf("%d", &choix);
+            if (v != 1 || choix < 1 || choix > 2)
+            {
+                printf("\033[1;31mLa valeur entrée est incorecte, veuillez réessayer.\033[0m\n");
+                scanf("%*[^\n]"); // Pour initialiser la zone de saisie
+            }
+        } while (v != 1 || choix < 1 || choix > 2);
+
+        for (i = 0; i < 9; i++)
+        {
+            if (tab[i] == choix)
+            {
                 action_pivoter(plateau, i);
             }
         }
@@ -545,10 +506,6 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
 
     case 6: // Général
         action_detruire(plateau, choix_roi_ministre_general(tab));
-        break;
-
-    case 8: // Princesse - Diagonale
-        // action_roi(plateau, choix_roi_ministre_general(tab));
         break;
 
     default:
