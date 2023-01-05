@@ -2,30 +2,6 @@
 #include <string.h>
 #include "header.h"
 
-void debut(struct s_partisan *plateau, struct s_joueur j_1, struct s_joueur j_2)
-/*
-Cette fonction prends en paramètre le plateau de jeu, et les deux listes correspondants au carte des joueurs.
-Elle commence une partie du jeu. Le premier joueur place une carte citoyen au premier tour.
-*/
-{
-    int i = 0;
-    do
-    {
-        printf("\033[44mTour %d\033[0m \033[%dmJoueur %d\033[0m\n", i + 1, 40 + i % 2 + 1, i % 2 + 1); // Affichage n°tour et n°joueur
-        aff_plateau(plateau);
-        if (i != 0)
-        {
-            i % 2 + 1 == 1 ? place_carte(plateau, &j_1, choix_emplacement(plateau), choix_personnage(j_1)) : place_carte(plateau, &j_2, choix_emplacement(plateau), choix_personnage(j_2));
-        }
-        else
-        {
-            printf("Le joueur 1 pose la carte citoyen.\n");
-            place_carte(plateau, &j_1, choix_emplacement(plateau), 1);
-        }
-        i++;
-    } while (est_plein(plateau) != 1);
-}
-
 int est_plein(struct s_partisan *plateau)
 /*
 Cette fonction prends en paramètre le plateau de jeu, et renvoie 1 si le plateau est plein, 0 sinon.
@@ -487,7 +463,76 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
                 action_pivoter(plateau, emplacement - 6);
             }
             break;
-        
+
+        case 2:
+            if (emplacement == 3 || emplacement == 4 || emplacement == 7)
+                action_pivoter(plateau, emplacement - 2);
+            else if (emplacement == 6)
+            {
+                action_pivoter(plateau, emplacement - 2);
+                action_pivoter(plateau, emplacement - 4);
+            }
+            break;
+
+        case 3:
+            if (emplacement == 1 || emplacement == 4 || emplacement == 7)
+                action_pivoter(plateau, emplacement + 1);
+            else if (emplacement == 0 || emplacement == 3 || emplacement == 6)
+            {
+                action_pivoter(plateau, emplacement + 1);
+                action_pivoter(plateau, emplacement + 2);
+            }
+            break;
+
+        case 4:
+            if (emplacement == 3 || emplacement == 4 || emplacement == 1)
+                action_pivoter(plateau, emplacement + 4);
+            else if (emplacement == 0)
+            {
+                action_pivoter(plateau, emplacement + 4);
+                action_pivoter(plateau, emplacement + 8);
+            }
+            break;
+
+        case 5:
+            if (emplacement == 3 || emplacement == 4 || emplacement == 5)
+                action_pivoter(plateau, emplacement + 3);
+            else if (emplacement == 0 || emplacement == 1 || emplacement == 2)
+            {
+                action_pivoter(plateau, emplacement + 3);
+                action_pivoter(plateau, emplacement + 6);
+            }
+            break;
+
+        case 6:
+            if (emplacement == 1 || emplacement == 4 || emplacement == 5)
+                action_pivoter(plateau, emplacement + 2);
+            else if (emplacement == 2)
+            {
+                action_pivoter(plateau, emplacement + 2);
+                action_pivoter(plateau, emplacement + 4);
+            }
+            break;
+
+        case 7:
+            if (emplacement == 1 || emplacement == 4 || emplacement == 7)
+                action_pivoter(plateau, emplacement - 1);
+            else if (emplacement == 2 || emplacement == 5 || emplacement == 8)
+            {
+                action_pivoter(plateau, emplacement - 1);
+                action_pivoter(plateau, emplacement - 2);
+            }
+            break;
+
+        case 8:
+            if (emplacement == 4 || emplacement == 5 || emplacement == 7)
+                action_pivoter(plateau, emplacement - 4);
+            else if (emplacement == 8)
+            {
+                action_pivoter(plateau, emplacement - 4);
+                action_pivoter(plateau, emplacement - 8);
+            }
+            break;
 
         default:
             break;
@@ -587,7 +632,7 @@ Directions :
             printf("\033[1;31mVous ne pouvez pas choisir cette direction. Veuillez choisir une autre direction.\033[0m\n");
             scanf("%*[^\n]"); // Pour initialiser la zone de saisie
         }
-    } while (v != 1 || p < 1 || p > 7 || tab[p + 8] != 1);
+    } while (v != 1 || p < 1 || p > 8 || tab[p + 8] != 1);
     return p;
 }
 
@@ -617,4 +662,23 @@ La fonction prends en paramètre :
 
         plateau[emplacement].orientation = plateau[emplacement].orientation % 2 + 1;
     }
+}
+
+int joueur_gagnant(struct s_partisan *plateau)
+/*
+Cette fonction prends en paramètre la grille de jeu, et renvoie le numéro du joueur qui a gagné.
+1 - Joueur 1 a gagné
+2 - Joueur 2 a gagné
+3 - Égalité
+*/
+{
+    int compteur_1 = 0, compteur_2 = 0, i;
+    for (i = 0; i < 8; i++)
+    {
+        plateau[i].orientation == 1 ? compteur_1++ : compteur_2++;
+    }
+    if (compteur_1 == compteur_2)
+        return 3;
+    else
+        return compteur_1 > compteur_2 ? 1 : 2;
 }

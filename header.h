@@ -40,12 +40,12 @@ void aff_plateau(struct s_partisan *); // Cette fonction affiche le tableau du j
 void affichage_actions_possibles(int*, int); // Affichage des zones d'applications
 
 // Fichier jeu - 1 Général
-void debut(struct s_partisan *, struct s_joueur, struct s_joueur);  // Fonction du début du jeu
 void place_carte(struct s_partisan *, struct s_joueur *, int, int); // Fonction qui place une carte sur le plateau et l'enlève de la liste
 int convertir(char *);                                              // Convertir des coordonnées passées en paramètre en un index pour le tableau du plateau
 int choix_emplacement(struct s_partisan *);                         // Cette fonction demande l'index et le renvoie
 int choix_personnage(struct s_joueur);                              // Choix du personnage
 int est_plein(struct s_partisan *);
+int joueur_gagnant(struct s_partisan *);
 
 // Fichier jeu - 2 Pouvoir des cartes
 void action(struct s_partisan *, struct s_joueur, int, int);

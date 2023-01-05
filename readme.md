@@ -83,16 +83,10 @@ chmod +x script.sh
 + Trouver une meilleure manière de proposer les cases possibles pour l'application du pouvoir (notre version ne prends pas en compte les cases vides ou le château)
 
 ## Choses à faire
-- [x] Conflit entre Château (7) et Princesse (4, diagonale)
-- [x] Le tableau, ne contient pas des 0 mais des autres valeurs sur d'autres systèmes
-- [x] Mettre Affichage du choix des endroits d'application des pouvoirs dans le fichier `affichage.c`
 - [ ] Après changement du fonctionnement du switch pour les emplacements, vérifier les emplacements possibles pour les pouvoirs de la princesse (4 et 8)
 - [ ] Vérifier cohérence de tous les noms de variables et de fonctions (en fonction de l'énoncé du sujet)
-- [ ] Remplacer les chiffres par le nom des cartes dans la fonction d'affichage du tableau
-- [ ] Faire la fonction qui demande l'endroit d'application des pouvoirs
-- [ ] Faire les fonctions d'application des pouvoirs
-- [ ] Les nombres du plateau sont sur fond noir
+- [ ] Remplacer les chiffres par le nom des cartes dans la fonction d'affichage du tableau et ajouter des effets graphique
+- [ ] Les nombres du plateau sont sur fond noir (en fonction de la couleur du terminal)
 - [ ] Vérifier les espaces dans la fonction restant_demande
-- [ ] Mise en forme graphique de la grille
 - [ ] Peut-être : Utiliser un fichier texte pour enregistrer les stats sur le jeu (gagant, nombre de coup, etc...)
 - [ ] Revoir l'affichage des différentes popssibilités (choix joueur, emplacement possible) en mettant en colonnes par exemple

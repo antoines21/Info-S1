@@ -14,7 +14,26 @@ int main(void)
         plateau[i].orientation = 0;
         plateau[i].personnage = 0;
         }
+    
     // Début du jeu
-    debut(plateau, joueur_1, joueur_2);
+    i = 0;
+    do
+    {
+        printf("\033[44mTour %d\033[0m \033[%dmJoueur %d\033[0m\n", i + 1, 40 + i % 2 + 1, i % 2 + 1); // Affichage n°tour et n°joueur
+        aff_plateau(plateau);
+        if (i != 0)
+        {
+            i % 2 + 1 == 1 ? place_carte(plateau, &joueur_1, choix_emplacement(plateau), choix_personnage(joueur_1)) : place_carte(plateau, &joueur_2, choix_emplacement(plateau), choix_personnage(joueur_2));
+        }
+        else
+        {
+            printf("Le joueur 1 pose la carte citoyen.\n");
+            place_carte(plateau, &joueur_1, choix_emplacement(plateau), 1);
+        }
+        i++;
+    } while (est_plein(plateau) != 1);
+    aff_plateau(plateau);
+    printf("Le joueur %d a gagné\n", joueur_gagnant(plateau));
+
     return 0;
 }
