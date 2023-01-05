@@ -174,6 +174,7 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
     for (i = 0; i < 17; tab[i++] = 0)
         ;
     /*
+    Cartes :
     1 - Citoyen
     2 - Roi
     3 - Reine
@@ -473,8 +474,24 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
         action_detruire(plateau, choix_roi_ministre_general(tab));
         break;
 
-    case 3:                       // Reine
-        int a = choix_reine(tab); // Retourne une valeur entre 1 et 8
+    case 3:                               // Reine
+        int direction = choix_reine(tab); // Retourne une valeur entre 1 et 8
+        switch (direction)
+        {
+        case 1:
+            if (emplacement == 3 || emplacement == 4 || emplacement == 5)
+                action_pivoter(plateau, emplacement - 3);
+            else if (emplacement == 6 || emplacement == 7 || emplacement == 8)
+            {
+                action_pivoter(plateau, emplacement - 3);
+                action_pivoter(plateau, emplacement - 6);
+            }
+            break;
+        
+
+        default:
+            break;
+        }
         break;
 
     case 4: // Princesse
@@ -542,6 +559,15 @@ Cette fonction prends en paramètre :
 - Le tableau des cases possibles (tableau de 17 cases, mais uniquement les cases 9 à 16 nous interessent)
 Et renvoie :
 - Le numéro de la direction choisie (une valeur entre 1 et 8)
+Directions :
+1 - Haut
+2 - Haut droite
+3 - Droite
+4 - Bas droite
+5 - Bas
+6 - Bas gauche
+7 - Gauche
+8 - Haut gauche
 */
 {
 
@@ -567,13 +593,12 @@ Et renvoie :
 
 void action_detruire(struct s_partisan *plateau, int emplacement)
 /*
-Le roi détruit 1 des 8 tuiles adjacentes
 La fonction prends en paramètre :
 - Le plateau du jeu
 - La case d'application du pouvoir, choisie par le joueur qui a posé la carte
 */
 {
-    if (plateau[emplacement].personnage != 7)
+    if (plateau[emplacement].personnage != 7) // Si la case n'est pas un château
     {
         plateau[emplacement].orientation = 0;
         plateau[emplacement].personnage = 0;
@@ -582,13 +607,12 @@ La fonction prends en paramètre :
 
 void action_pivoter(struct s_partisan *plateau, int emplacement)
 /*
-Le mnistre pivote 1 des 8 tuiles adjacentes
 La fonction prends en paramètre :
 - Le plateau du jeu
 - La case d'application du pouvoir, choisie par le joueur qui a posé la carte
 */
 {
-    if (plateau[emplacement].personnage != 7 && plateau[emplacement].orientation != 0)
+    if (plateau[emplacement].personnage != 7 && plateau[emplacement].orientation != 0) // Si la case n'est pas vide et n'est pas un château
     {
 
         plateau[emplacement].orientation = plateau[emplacement].orientation % 2 + 1;
