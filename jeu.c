@@ -80,6 +80,7 @@ programme renvoie la valeur 9.
     {
     case 'A':
         break;
+
     case 'B':
         index_num += 1;
         break;
@@ -114,7 +115,7 @@ programme renvoie la valeur 9.
 int choix_personnage(struct s_joueur j)
 /*
 Cette fonction permet de choisir le personnage à jouer. Elle prends en paramètre la structure d'un joueur, et renvoie
-le numéro de la carte choisir (entre 1 et 7). La fonction remdemande un nombre si la carte n'est plus disponible ou si la
+le numéro de la carte choisie (entre 1 et 7). La fonction remdemande un nombre si la carte n'est plus disponible ou si la
 valeur rentrée est incorecte.
 */
 {
@@ -141,6 +142,8 @@ valeur rentrée est incorecte.
 void action(struct s_partisan *plateau, struct s_joueur joueur, int emplacement, int carte)
 /*
 Cette fonction prends en paramètre :
+- Le plateau de jeu
+- Le joueur qui l'a posée
 - L'emplacement de la carte posée
 - La carte qui a été posée
 Et affiche les possibilités pour l'application du pouvoir du joueur
@@ -442,7 +445,7 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
     default:
         break;
     }
-    affichage_actions_possibles(tab, carte);
+    if (carte > 1 && carte < 7 && carte != 4) affichage_actions_possibles(tab, carte);
 
     switch (carte)
     {

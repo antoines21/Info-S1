@@ -12,61 +12,44 @@ Pour la couleur :
     printf("\n");
     for (int i = 0; i < 9; i++)
     {
-        printf("\033[%dm%d\033[0m", plateau[i].orientation + 40, plateau[i].personnage);
-        if ((i + 1) % 3 == 0)
-            printf("\n");
-    }
-    printf("\n");
-}
-
-void restant(struct s_joueur j)
-/*
-Cette fonction prends en paramètre une structure joueur, et affiche les cartes qui sont disponibles pour ce joueur.
-La fonction regarde chaque case de la liste des cartes, et affiche en conséquence le nom de la carte correspondante.
-Les 7 cartes ont leur place définies (index 0 à 6 dans la liste). Si la carte est disponible la case vaut 1, 0 sinon.
-*/
-{
-    printf("Cartes disponibles pour le joueur %d : ", j.orientation);
-    for (int i = 0; i < 7; i++)
-    {
-        if (j.cartes[i] == 1)
-        {
-            printf("\033[1;%dm", 30 + i);
-            switch (i)
+        if (plateau[i].orientation == 1 || plateau[i].orientation == 2) printf("\033[%dm", plateau[i].orientation + 40);
+        switch (plateau[i].personnage)
             {
-            case 0:
-                printf("Citoyen ");
-                break;
-
             case 1:
-                printf("Roi ");
+                printf("Citoyen");
                 break;
 
             case 2:
-                printf("Reine ");
+                printf("Roi");
                 break;
 
             case 3:
-                printf("Princesse ");
+                printf("Reine");
                 break;
 
             case 4:
-                printf("Ministre ");
+                printf("Princesse");
                 break;
 
             case 5:
-                printf("Général ");
+                printf("Ministre");
                 break;
 
             case 6:
-                printf("Château ");
+                printf("Général");
+                break;
+
+            case 7:
+                printf("Château");
                 break;
 
             default:
+                printf(" - ");
                 break;
             }
             printf("\033[0m");
-        }
+        if ((i + 1) % 3 == 0)
+            printf("\n");
     }
     printf("\n");
 }
@@ -79,45 +62,47 @@ Les 7 cartes ont leur place définies (index 0 à 6 dans la liste). Si la carte 
 */
 {
     printf("Cartes disponibles pour le joueur %d : ", j.orientation);
+    printf("\n");
     for (int i = 0; i < 7; i++)
     {
         if (j.cartes[i] == 1)
         {
-            printf("\033[1;%dm%d ", 30 + i, i + 1);
+            printf("\033[1;%dm[%d] ", 30 + i, i + 1);
             switch (i)
             {
             case 0:
-                printf("Citoyen ");
+                printf("Citoyen");
                 break;
 
             case 1:
-                printf("Roi ");
+                printf("Roi");
                 break;
 
             case 2:
-                printf("Reine ");
+                printf("Reine");
                 break;
 
             case 3:
-                printf("Princesse ");
+                printf("Princesse");
                 break;
 
             case 4:
-                printf("Ministre ");
+                printf("Ministre");
                 break;
 
             case 5:
-                printf("Général ");
+                printf("Général");
                 break;
 
             case 6:
-                printf("Château ");
+                printf("Château");
                 break;
 
             default:
                 break;
             }
             printf("\033[0m");
+            printf(" ");
         }
     }
     printf("\n");
@@ -133,90 +118,91 @@ Les personnages qui demandent une une case ou une direction en fonction de la ca
 6 - Général
 */
 {
-    if (carte > 1 && carte < 7 && carte != 4)
+
+    int i;
+    printf("Vous pouvez appliquer votre pouvoir sur l'une des cases suivantes : ");
+    printf("\n");
+    for (i = 0; i < 17; i++)
     {
-        int i;
-        printf("vous pouvez appliquer votre pouvoir sur les cases suivantes : ");
-        for (i = 0; i < 17; i++)
+        if (tab[i] == 1)
         {
-            if (tab[i] == 1)
+            printf("\033[1;36m[");
+            switch (i)
             {
-                switch (i)
-                {
-                case 0:
-                    printf("A1");
-                    break;
+            case 0:
+                printf("A1");
+                break;
 
-                case 1:
-                    printf("B1");
-                    break;
+            case 1:
+                printf("B1");
+                break;
 
-                case 2:
-                    printf("C1");
-                    break;
+            case 2:
+                printf("C1");
+                break;
 
-                case 3:
-                    printf("A2");
-                    break;
+            case 3:
+                printf("A2");
+                break;
 
-                case 4:
-                    printf("B2");
-                    break;
+            case 4:
+                printf("B2");
+                break;
 
-                case 5:
-                    printf("C2");
-                    break;
+            case 5:
+                printf("C2");
+                break;
 
-                case 6:
-                    printf("A3");
-                    break;
+            case 6:
+                printf("A3");
+                break;
 
-                case 7:
-                    printf("B3");
-                    break;
+            case 7:
+                printf("B3");
+                break;
 
-                case 8:
-                    printf("C3");
-                    break;
+            case 8:
+                printf("C3");
+                break;
 
-                case 9:
-                    printf("%d ↑", i-8);
-                    break;
+            case 9:
+                printf("%d ↑", i - 8);
+                break;
 
-                case 10:
-                    printf("%d ↗", i-8);
-                    break;
+            case 10:
+                printf("%d ↗", i - 8);
+                break;
 
-                case 11:
-                    printf("%d →", i-8);
-                    break;
+            case 11:
+                printf("%d →", i - 8);
+                break;
 
-                case 12:
-                    printf("%d ↘", i-8);
-                    break;
+            case 12:
+                printf("%d ↘", i - 8);
+                break;
 
-                case 13:
-                    printf("%d ↓", i-8);
-                    break;
+            case 13:
+                printf("%d ↓", i - 8);
+                break;
 
-                case 14:
-                    printf("%d ↙", i-8);
-                    break;
+            case 14:
+                printf("%d ↙", i - 8);
+                break;
 
-                case 15:
-                    printf("%d ←", i-8);
-                    break;
+            case 15:
+                printf("%d ←", i - 8);
+                break;
 
-                case 16:
-                    printf("%d ↖", i-8);
-                    break;
+            case 16:
+                printf("%d ↖", i - 8);
+                break;
 
-                default:
-                    break;
-                }
-                printf(" ");
+            default:
+                break;
             }
+            printf("]\033[0m ");
         }
     }
+
     printf("\n");
 }

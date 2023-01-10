@@ -87,6 +87,6 @@ chmod +x script.sh
 - [ ] Vérifier cohérence de tous les noms de variables et de fonctions (en fonction de l'énoncé du sujet)
 - [ ] Remplacer les chiffres par le nom des cartes dans la fonction d'affichage du tableau et ajouter des effets graphique
 - [ ] Les nombres du plateau sont sur fond noir (en fonction de la couleur du terminal)
-- [ ] Vérifier les espaces dans la fonction restant_demande
+- [x] Vérifier les espaces dans la fonction restant_demande
 - [ ] Peut-être : Utiliser un fichier texte pour enregistrer les stats sur le jeu (gagant, nombre de coup, etc...)
 - [ ] Revoir l'affichage des différentes popssibilités (choix joueur, emplacement possible) en mettant en colonnes par exemple

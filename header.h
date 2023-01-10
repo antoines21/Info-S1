@@ -34,8 +34,7 @@ Structure qui représente un joueur
 };
 
 // Fonctions dans le fichier affichage
-void restant(struct s_joueur); // Fonction qui affiche au joueur ses cartes restantes
-void restant_demande(struct s_joueur);
+void restant_demande(struct s_joueur); // Fonction qui affiche les cartes restantes d'un joueur
 void aff_plateau(struct s_partisan *); // Cette fonction affiche le tableau du jeu
 void affichage_actions_possibles(int*, int); // Affichage des zones d'applications
 
