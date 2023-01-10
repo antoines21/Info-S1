@@ -9,49 +9,51 @@ Pour la couleur :
 - Joueur 2 (clan du bas) : Vert
 */
 {
-    printf("\n");
+    printf("\n        A         B         C\n   ┌─────────┬─────────┬─────────┐\n 1 ");
     for (int i = 0; i < 9; i++)
     {
-        if (plateau[i].orientation == 1 || plateau[i].orientation == 2) printf("\033[%dm", plateau[i].orientation + 40);
+        printf("│");
+        if (plateau[i].orientation == 1 || plateau[i].orientation == 2)
+            printf("\033[%dm", plateau[i].orientation + 40);
         switch (plateau[i].personnage)
-            {
-            case 1:
-                printf("Citoyen");
-                break;
+        {
+        case 1:
+            printf(" Citoyen ");
+            break;
 
-            case 2:
-                printf("Roi");
-                break;
+        case 2:
+            printf("   Roi   ");
+            break;
 
-            case 3:
-                printf("Reine");
-                break;
+        case 3:
+            printf("  Reine  ");
+            break;
 
-            case 4:
-                printf("Princesse");
-                break;
+        case 4:
+            printf("Princesse");
+            break;
 
-            case 5:
-                printf("Ministre");
-                break;
+        case 5:
+            printf("Ministre ");
+            break;
 
-            case 6:
-                printf("Général");
-                break;
+        case 6:
+            printf(" Général ");
+            break;
 
-            case 7:
-                printf("Château");
-                break;
+        case 7:
+            printf(" Château ");
+            break;
 
-            default:
-                printf(" - ");
-                break;
-            }
-            printf("\033[0m");
-        if ((i + 1) % 3 == 0)
-            printf("\n");
+        default:
+            printf("         ");
+            break;
+        }
+        printf("\033[0m");
+        if ((i + 1) % 3 == 0 && i != 8)
+            printf("│▒\n   ├─────────┼─────────┼─────────┤▒\n %d ", i % 2 + 2);
     }
-    printf("\n");
+    printf("│▒\n   └─────────┴─────────┴─────────┘▒\n    ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n\n");
 }
 
 void restant_demande(struct s_joueur j)
@@ -67,7 +69,7 @@ Les 7 cartes ont leur place définies (index 0 à 6 dans la liste). Si la carte 
     {
         if (j.cartes[i] == 1)
         {
-            printf("\033[1;%dm[%d] ", 30 + i, i + 1);
+            printf("\033[1;%dm[%d] ", i == 0 ? 37 : 30 + i, i + 1);
             switch (i)
             {
             case 0:
@@ -126,7 +128,7 @@ Les personnages qui demandent une une case ou une direction en fonction de la ca
     {
         if (tab[i] == 1)
         {
-            printf("\033[1;36m[");
+            printf("\033[1;37m[");
             switch (i)
             {
             case 0:
