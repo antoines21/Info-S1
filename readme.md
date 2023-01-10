@@ -76,6 +76,7 @@ chmod +x script.sh
 + Une fonction ne peux pas renvoyer un tableau. Cependant, une fonction peut renvoyer une structure, qui elle peut contenir un tableau à l'intérieur
 + `scanf("%*[^\n]");` Pour initialiser la valeur de saisie
 + Il est important de nommer les variables et des fonctions avec des noms cohérent et précis dès le début de la programmation
++ Nous ne pouvons pas mettre une déclaration de variable juste après un switch, sinon l'erreur `a label can only be part of a statement and a declaration is not a statement` est renvoyée; pour ce faire, il faut mettre un ` ;` juste après le `case`. [Lien de la source](https://www.delftstack.com/howto/c/a-label-can-only-be-part-of-a-statement-and-a-declaration-is-not-a-statement/#a-label-can-only-be-part-of-a-statement-and-a-declaration-is-not-a-statement-error-when-using-switch-statements-in-c).
 
 ## Pistes d'amélioration
 

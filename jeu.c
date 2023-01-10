@@ -445,7 +445,8 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
     default:
         break;
     }
-    if (carte > 1 && carte < 7 && carte != 4) affichage_actions_possibles(tab, carte);
+    if (carte > 1 && carte < 7 && carte != 4)
+        affichage_actions_possibles(tab, carte);
 
     switch (carte)
     {
@@ -453,7 +454,7 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
         action_detruire(plateau, choix_roi_ministre_general(tab));
         break;
 
-    case 3:                               // Reine
+    case 3:;                              // Reine
         int direction = choix_reine(tab); // Retourne une valeur entre 1 et 8
         switch (direction)
         {
@@ -542,7 +543,7 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
         }
         break;
 
-    case 4: // Princesse
+    case 4:; // Princesse
 
         int v, choix;
         do
