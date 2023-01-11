@@ -670,10 +670,8 @@ La fonction prends en paramètre :
 
 int joueur_gagnant(struct s_partisan *plateau)
 /*
-Cette fonction prends en paramètre la grille de jeu, et renvoie le numéro du joueur qui a gagné.
-1 - Joueur 1 a gagné
-2 - Joueur 2 a gagné
-3 - Égalité
+Cette fonction prends en paramètre la grille de jeu, et renvoie le numéro du joueur qui a gagné (1 ou 2). Il ne peux pas
+y avoir égalité (car 9 n'est pas divisible par 2).
 */
 {
     int compteur_1 = 0, compteur_2 = 0, i;
@@ -681,8 +679,5 @@ Cette fonction prends en paramètre la grille de jeu, et renvoie le numéro du j
     {
         plateau[i].orientation == 1 ? compteur_1++ : compteur_2++;
     }
-    if (compteur_1 == compteur_2)
-        return 3;
-    else
-        return compteur_1 > compteur_2 ? 1 : 2;
+    return compteur_1 > compteur_2 ? 1 : 2;
 }

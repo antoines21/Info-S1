@@ -33,7 +33,8 @@ int main(void)
         i++;
     } while (est_plein(plateau) != 1);
     aff_plateau(plateau);
-    printf("Le joueur %d a gagné\n", joueur_gagnant(plateau));
+    int gagnant = joueur_gagnant(plateau);
+    printf("Le \033[%dmjoueur %d\033[0m a gagné !\n", 40 + gagnant, gagnant);
 
     return 0;
 }
