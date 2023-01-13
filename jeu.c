@@ -150,8 +150,7 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
 */
 {
     int tab[17], i;
-    for (i = 0; i < 17; tab[i++] = 0)
-        ;
+    for (i = 0; i < 17; tab[i++] = 0);
     /*
     Cartes :
     1 - Citoyen
@@ -621,24 +620,24 @@ Directions :
 */
 {
 
-    int p, v;
+    int direction, v;
     do
 
     {
         printf("Numéro de la direction choisie : ");
-        v = scanf("%d", &p);
-        if (v != 1 || p < 1 || p > 8)
+        v = scanf("%d", &direction);
+        if (v != 1 || direction < 1 || direction > 8)
         {
             printf("\033[1;31mLa valeur entrée est incorecte, veuillez réessayer.\033[0m\n");
             scanf("%*[^\n]"); // Pour initialiser la zone de saisie
         }
-        else if (tab[p + 8] != 1)
+        else if (tab[direction + 8] != 1)
         {
             printf("\033[1;31mVous ne pouvez pas choisir cette direction. Veuillez choisir une autre direction.\033[0m\n");
             scanf("%*[^\n]"); // Pour initialiser la zone de saisie
         }
-    } while (v != 1 || p < 1 || p > 8 || tab[p + 8] != 1);
-    return p;
+    } while (v != 1 || direction < 1 || direction > 8 || tab[direction + 8] != 1);
+    return direction;
 }
 
 void action_detruire(struct s_partisan *plateau, int emplacement)

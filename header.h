@@ -1,4 +1,5 @@
 // Structures
+
 struct s_partisan
 /*
 Structure qui représente un personnage placé et orienté
@@ -29,7 +30,7 @@ Structure qui représente un joueur
     int cartes[7];
     /*
     Tableau de 7 cases qui représente les cartes disponibles pour le joueur
-    Chaque case (0 à 6) correspond à un personnage (1 à 7). 1 = Dispo. 0 = Personnage plus dispo
+    Chaque case (index 0 à 6) correspond à un personnage (1 à 7). 1 = Dispo. 0 = Personnage plus dispo
     */
 };
 
