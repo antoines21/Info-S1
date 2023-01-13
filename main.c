@@ -16,10 +16,13 @@ int main(void)
         }
     
     // Début du jeu
+
+    printf("┌───────────────────┐\n│    \033[1;5mDÉBUT DU JEU\033[0m   │▒\n│ \033[3mLuttes de pouvoir\033[0m │▒\n└───────────────────┘▒\n ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n");
+
     i = 0;
     do
     {
-        printf("\033[44mTour %d\033[0m \033[%dmJoueur %d\033[0m\n", i + 1, 40 + i % 2 + 1, i % 2 + 1); // Affichage n°tour et n°joueur
+        printf("\n\033[44mTour %d\033[0m \033[%dmJoueur %d\033[0m\n", i + 1, 40 + i % 2 + 1, i % 2 + 1); // Affichage n°tour et n°joueur
         aff_plateau(plateau);
         if (i != 0)
         {
@@ -27,14 +30,14 @@ int main(void)
         }
         else
         {
-            printf("Le joueur 1 pose la carte citoyen.\n");
+            printf("Le joueur 1 pose la carte citoyen (le citoyen n'a pas de pouvoir).\n");
             place_carte(plateau, &joueur_1, choix_emplacement(plateau), 1);
         }
         i++;
     } while (est_plein(plateau) != 1);
     aff_plateau(plateau);
     int gagnant = joueur_gagnant(plateau);
-    printf("Le \033[%dmjoueur %d\033[0m a gagné !\n", 40 + gagnant, gagnant);
+    printf("┌───────────────────┐\n│      \033[1;5mGAGNANT\033[0m      │▒\n│     \033[%dmJoueur %d\033[0m      │▒\n└───────────────────┘▒\n ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n", 40 + gagnant, gagnant);
 
     return 0;
 }

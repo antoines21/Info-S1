@@ -26,33 +26,37 @@ Le plateau du jeu est représenté par un tableau de 9 cases, comprenant dans ch
 
 ### Couleurs des clans
 
-Les couleurs (rouge et vert) n'ont pas de significations particulières. Nous avons utilisé ces couleurs, car leur code ASCII se suivent. 
+L'orientation des cartes peut être observée grâce à la couleur de chaque carte posée.
++ Clan 1 : Rouge
++ Clan 2 : Vert
+
+Nous avons affiché du texte de différentes couleurs dans le terminal grâce aux caractères d'échapement 
 
 
 ## Notes sur le fonctionnement du jeu
 
 ### Règles du jeu
 
-Deux **clans** luttent pour avoir la plus grande influence dans la **cour du roi**.
+Deux **clans** luttent pour avoir la plus grande influence dans la **cour du roi**. À chaque tour, un joueur pose une carte sur le plateau et applique le pouvoir de la carte.
 
 ### Personnages disponibles 
 
-| Numéro | Nom       |
-| ------ | --------- |
-| 1      | Citoyen   |
-| 2      | Roi       |
-| 3      | Reine     |
-| 4      | Princesse |
-| 5      | Ministre  |
-| 6      | Général   |
-| 7      | Château   |
+| Numéro | Nom       | Pouvoir                                                                    |
+| ------ | --------- | -------------------------------------------------------------------------- |
+| 1      | Citoyen   | Aucun pouvoir                                                              |
+| 2      | Roi       | Détruit une des tuiles orthogonales ou diagonalement adjacentes            |
+| 3      | Reine     | Pivote toutes les cartes présentes dans l'une des directions autour d'elle |
+| 4      | Princesse | Pivote les 4 tuiles orthogonalement ou diagonalement adjacentes            |
+| 5      | Ministre  | Pivote une des tuiles orthogonales ou diagonalement adjacentes             |
+| 6      | Général   | Détruit l'une des 4 tuiles qui lui sont orthogonalement adjacentes         |
+| 7      | Château   | Immunisé contre les autres effets                                          |
 
 
 ## Glossaire
 + **Cour** : Grille *3x3* qui représente la cour du roi. Les partisans sont placés dans cette cour ;
 + **Partisan** : Personnage qui est placé dans la cour et qui soutient l'un des deux clans ;
 + **Personnage** : Type de partisan (citoyen, roi, reine, etc..)
-+ **Orientation** : Appartenance de la carte à l'un des deux clans.
++ **Orientation** : Appartenance de la carte à l'un des deux clans (couleur de la carte).
 
 ## Compilation et exécution
 
@@ -71,23 +75,16 @@ chmod +x script.sh
 ```
 
 
-## Ce que j'ai appris lors de ce projet
+## Ce que nous avons apris lors de ce projet
++ Afficher du texte de différentes couleurs dans le terminal grâce aux caractères d'échappement. [Page Wikipedia sur le sujet](https://en.wikipedia.org/wiki/ANSI_escape_code).
 + `tab*` et `tab[]` font la même choses quand ils sont paramètres de fonctions. Cependant, l'utilisation de `tab*` est recommandée
 + Une fonction ne peux pas renvoyer un tableau. Cependant, une fonction peut renvoyer une structure, qui elle peut contenir un tableau à l'intérieur
-+ `scanf("%*[^\n]");` Pour initialiser la valeur de saisie
++ `scanf("%*[^\n]");` Pour initialiser la valeur de saisie [Source sur le site Stack Overflow ](https://stackoverflow.com/a/30070821).
 + Il est important de nommer les variables et des fonctions avec des noms cohérent et précis dès le début de la programmation
 + Nous ne pouvons pas mettre une déclaration de variable juste après un switch, sinon l'erreur `a label can only be part of a statement and a declaration is not a statement` est renvoyée; pour ce faire, il faut mettre un ` ;` juste après le `case`. [Lien de la source](https://www.delftstack.com/howto/c/a-label-can-only-be-part-of-a-statement-and-a-declaration-is-not-a-statement/#a-label-can-only-be-part-of-a-statement-and-a-declaration-is-not-a-statement-error-when-using-switch-statements-in-c).
 
 ## Pistes d'amélioration
 
 + Nous aurions pu utiliser des structures pour définir de manière harmonisée les personnages et leurs pouvoirs (au lieu d'utiliser un grand nombre d'opérateur logique).
-+ Trouver une meilleure manière de proposer les cases possibles pour l'application du pouvoir (notre version ne prends pas en compte les cases vides ou le château)
-
-## Choses à faire
-- [ ] Après changement du fonctionnement du switch pour les emplacements, vérifier les emplacements possibles pour les pouvoirs de la princesse (4 et 8)
-- [ ] Vérifier cohérence de tous les noms de variables et de fonctions (en fonction de l'énoncé du sujet)
-- [ ] Remplacer les chiffres par le nom des cartes dans la fonction d'affichage du tableau et ajouter des effets graphique
-- [ ] Les nombres du plateau sont sur fond noir (en fonction de la couleur du terminal)
-- [x] Vérifier les espaces dans la fonction restant_demande
-- [ ] Peut-être : Utiliser un fichier texte pour enregistrer les stats sur le jeu (gagant, nombre de coup, etc...)
-- [x] Revoir l'affichage des différentes popssibilités (choix joueur, emplacement possible) en mettant en colonnes par exemple
++ Utiliser une matrice au lieu d'un tableau d'une seule dimension.
++ Utiliser des opérateur mathématiques au lieu de longs `switch` pour le choix des cartes et ds directions.

@@ -252,6 +252,7 @@ Et affiche les possibilités pour l'application du pouvoir du joueur
     case 3:
         if (carte == 2 || carte == 5)
         {
+            tab[0] = 1;
             tab[1] = 1;
             tab[4] = 1;
             tab[6] = 1;

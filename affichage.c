@@ -63,8 +63,7 @@ La fonction regarde chaque case de la liste des cartes, et affiche en conséquen
 Les 7 cartes ont leur place définies (index 0 à 6 dans la liste). Si la carte est disponible la case vaut 1, 0 sinon.
 */
 {
-    printf("Cartes disponibles pour le joueur %d : ", j.orientation);
-    printf("\n");
+    printf("Cartes disponibles pour le joueur %d : \n\n", j.orientation);
     for (int i = 0; i < 7; i++)
     {
         if (j.cartes[i] == 1)
@@ -73,38 +72,37 @@ Les 7 cartes ont leur place définies (index 0 à 6 dans la liste). Si la carte 
             switch (i)
             {
             case 0:
-                printf("Citoyen");
+                printf("Citoyen : Aucun pouvoir\n");
                 break;
 
             case 1:
-                printf("Roi");
+                printf("Roi : Détruit une des tuiles orthogonales ou diagonalement adjacentes\n");
                 break;
 
             case 2:
-                printf("Reine");
+                printf("Reine : Pivote toutes les cartes présentes dans l'une des directions autour d'elle\n");
                 break;
 
             case 3:
-                printf("Princesse");
+                printf("Princesse : Pivote les 4 tuiles orthogonalement ou diagonalement adjacentes\n");
                 break;
 
             case 4:
-                printf("Ministre");
+                printf("Ministre : Pivote une des tuiles orthogonales ou diagonalement adjacentes\n");
                 break;
 
             case 5:
-                printf("Général");
+                printf("Général : Détruit l'une des 4 tuiles qui lui sont orthogonalement adjacentes\n");
                 break;
 
             case 6:
-                printf("Château");
+                printf("Château : Immunisé contre les autres effets\n");
                 break;
 
             default:
                 break;
             }
             printf("\033[0m");
-            printf(" ");
         }
     }
     printf("\n");
